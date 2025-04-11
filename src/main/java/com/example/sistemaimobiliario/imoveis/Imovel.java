@@ -1,4 +1,5 @@
-package com.example.sistemaimobiliario;
+package com.example.sistemaimobiliario.imoveis;
+import com.example.sistemaimobiliario.usuario.Corretor;
 
 public class Imovel {
     private String endereco;
@@ -9,8 +10,12 @@ public class Imovel {
     private String descricao;
     private String proprietario;
     private String status;
+    private Corretor corretor;
+    private static int contador = 0;
+    private String tipoImovel;
+    private String tipoVenda;
 
-    public Imovel(String endereco, double preco, int quartos, int banheiros, double area, String descricao, String proprietario, String status) {
+    public Imovel(String endereco, double preco, int quartos, int banheiros, double area, String descricao, String proprietario, String status, Corretor corretor, String tipoImovel, String tipoVenda) {
         this.endereco = endereco;
         this.preco = preco;
         this.quartos = quartos;
@@ -19,6 +24,10 @@ public class Imovel {
         this.descricao = descricao;
         this.proprietario = proprietario;
         this.status = status;
+        this.corretor = corretor;
+        this.tipoImovel = tipoImovel;
+        this.tipoVenda = tipoVenda;
+        contador++;
     }
 
     public String getEndereco() {return endereco;}
@@ -45,6 +54,13 @@ public class Imovel {
     public String getStatus() {return status;}
     public void setStatus(String status) {this.status = status;}
 
+    public Corretor getCorretor() {return corretor;}
+    public void setCorretor(Corretor corretor) {this.corretor = corretor;}
+
+    public String getTipoImovel() {return tipoImovel;}
+
+    public String getTipoVenda() {return tipoVenda;}
+
     public void exibirDetalhes() {
         System.out.println("Endereço: " + endereco);
         System.out.println("Preço: " + preco);
@@ -54,5 +70,6 @@ public class Imovel {
         System.out.println("Descrição: " + descricao);
         System.out.println("Proprietário: " + proprietario);
         System.out.println("Status: " + status);
+        corretor.exibirDetalhes();
     }
 }

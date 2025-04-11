@@ -1,4 +1,5 @@
-package com.example.sistemaimobiliario;
+package com.example.sistemaimobiliario.imoveis;
+import com.example.sistemaimobiliario.usuario.Corretor;
 
 public class Casa extends Imovel{
     private boolean temQuintal;
@@ -6,15 +7,15 @@ public class Casa extends Imovel{
     private boolean temGaragem;
     private int andar;
 
-    public Casa(String endereco, double preco, int quartos, int banheiros, double area, String descricao, String proprietario, String status, boolean temQuintal, boolean temGaragem, boolean temPiscina) {
-        super(endereco, preco, quartos, banheiros, area, descricao, proprietario, status);
+    public Casa(String endereco, double preco, int quartos, int banheiros, double area, String descricao, String proprietario, String status, boolean temQuintal, boolean temGaragem, boolean temPiscina, Corretor corretor, String tipoImovel, String tipoVenda) {
+        super(endereco, preco, quartos, banheiros, area, descricao, proprietario, status, corretor, tipoImovel, tipoVenda);
         this.temQuintal = temQuintal;
         this.temGaragem = temGaragem;
         this.temPiscina = temPiscina;
     }
 
-    public Casa(String endereco, double preco, int quartos, int banheiros, double area, String descricao, String proprietario, String status, boolean temQuintal, boolean temGaragem, boolean temPiscina, int andar) {
-        super(endereco, preco, quartos, banheiros, area, descricao, proprietario, status);
+    public Casa(String endereco, double preco, int quartos, int banheiros, double area, String descricao, String proprietario, String status, boolean temQuintal, boolean temGaragem, boolean temPiscina, int andar, Corretor corretor, String tipoImovel, String tipoVenda) {
+        super(endereco, preco, quartos, banheiros, area, descricao, proprietario, status, corretor, tipoImovel, tipoVenda);
         this.temQuintal = temQuintal;
         this.temGaragem = temGaragem;
         this.temPiscina = temPiscina;

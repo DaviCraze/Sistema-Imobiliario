@@ -10,4 +10,10 @@ module com.example.sistemaimobiliario {
 
     opens com.example.sistemaimobiliario to javafx.fxml;
     exports com.example.sistemaimobiliario;
+    exports com.example.sistemaimobiliario.usuario;
+    opens com.example.sistemaimobiliario.usuario to javafx.fxml;
+    exports com.example.sistemaimobiliario.imoveis;
+    opens com.example.sistemaimobiliario.imoveis to javafx.fxml;
+    exports com.example.sistemaimobiliario.test to javafx.graphics;
+    opens com.example.sistemaimobiliario.test to javafx.fxml;
 }
