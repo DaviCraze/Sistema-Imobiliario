@@ -1,7 +1,5 @@
 package com.example.sistemaimobiliario.utilitario;
 
-
-
 import java.util.ArrayList;
 import com.example.sistemaimobiliario.imoveis.Imovel;
 import com.example.sistemaimobiliario.imoveis.Casa;

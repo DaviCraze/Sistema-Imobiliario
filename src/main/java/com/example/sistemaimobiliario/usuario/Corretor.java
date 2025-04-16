@@ -10,9 +10,10 @@ public class Corretor extends Pessoa {
     private String cnpj;
     private List<Interesse> interesses;
     private static int contador = 0;
+    private String senha;
 
-    public Corretor(String nome, String cpf, String telefone, String email, String cnpj, String nomeEmpresa) {
-        super(nome, cpf, telefone, email);
+    public Corretor(String nome, String cpf, String telefone, String email, String cnpj, String nomeEmpresa, String senha) {
+        super(nome, cpf, telefone, email, senha);
         this.cnpj = cnpj;
         this.nomeEmpresa = nomeEmpresa;
         this.interesses = new ArrayList<>();
