@@ -1,7 +1,10 @@
 package com.example.sistemaimobiliario.imoveis;
 import com.example.sistemaimobiliario.usuario.Corretor;
 
-public class Imovel {
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class Imovel {
     private String endereco;
     private double preco;
     private int quartos;
@@ -12,6 +15,7 @@ public class Imovel {
     private String status;
     private Corretor corretor;
     private static int contador = 0;
+    private List<String> tags = new ArrayList<>();
     private String tipoImovel;
     private String tipoVenda;
 
@@ -25,6 +29,8 @@ public class Imovel {
         this.proprietario = proprietario;
         this.status = status;
         this.corretor = corretor;
+        tags.add(tipoImovel);
+        tags.add(tipoVenda);
         this.tipoImovel = tipoImovel;
         this.tipoVenda = tipoVenda;
         contador++;
@@ -57,9 +63,8 @@ public class Imovel {
     public Corretor getCorretor() {return corretor;}
     public void setCorretor(Corretor corretor) {this.corretor = corretor;}
 
-    public String getTipoImovel() {return tipoImovel;}
-
-    public String getTipoVenda() {return tipoVenda;}
+    public List<String> getTags() {return tags;}
+    public void setTags(String tags) {this.tags.add(tags);}
 
     public void exibirDetalhes() {
         System.out.println("Endereço: " + endereco);

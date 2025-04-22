@@ -9,22 +9,20 @@ public class Apartamento extends Imovel{
 
     public Apartamento(String endereco, double preco, int quartos, int banheiros, double area, String descricao, String proprietario, String status, boolean temElevador, boolean temSacada, Corretor corretor, String tipoImovel, String tipoVenda) {
         super(endereco, preco, quartos, banheiros, area, descricao, proprietario, status, corretor, tipoImovel, tipoVenda);
-        this.temElevador = temElevador;
-        this.temSacada = temSacada;
+        if(temElevador) {setTags("Tem elevador");}
+        if(temSacada) {setTags("Tem sacada");}
     }
 
     public Apartamento(String endereco, double preco, int quartos, int banheiros, double area, String descricao, String proprietario, String status, boolean temElevador, boolean temSacada, int andar, Corretor corretor, String tipoImovel, String tipoVenda) {
         super(endereco, preco, quartos, banheiros, area, descricao, proprietario, status, corretor, tipoImovel, tipoVenda);
-        this.temElevador = temElevador;
-        this.temSacada = temSacada;
+        if(temElevador) {setTags("Tem elevador");}
+        if(temSacada) {setTags("Tem sacada");}
         this.andar = andar;
     }
 
-    public boolean isTemElevador() {return temElevador;}
-    public void setTemElevador(boolean temElevador) {this.temElevador = temElevador;}
+    public boolean getTemElevador() {return temElevador;}
 
-    public boolean isTemSacada() {return temSacada;}
-    public void setTemSacada(boolean temSacada) {this.temSacada = temSacada;}
+    public boolean getTemSacada() {return temSacada;}
 
     public int getAndar() {return andar;}
     public void setAndar(int andar) {this.andar = andar;}

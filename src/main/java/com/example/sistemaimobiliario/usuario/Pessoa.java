@@ -1,6 +1,6 @@
 package com.example.sistemaimobiliario.usuario;
 
-public class Pessoa {
+public abstract class Pessoa implements Usuario{
     private String nome;
     private String cpf;
     private String telefone;
@@ -27,7 +27,7 @@ public class Pessoa {
     public String getEmail() {return email;}
     public void setEmail(String email) {this.email = email;}
 
-    public void setSenha(String senha) {this.senha = senha;}
+    public String getSenha() {return senha;}
 
     public void exibirDetalhes() {
         System.out.println("Nome: " + nome);

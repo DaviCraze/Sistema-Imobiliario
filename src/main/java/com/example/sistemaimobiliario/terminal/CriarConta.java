@@ -1,39 +1,118 @@
 package com.example.sistemaimobiliario.terminal;
 
 import com.example.sistemaimobiliario.usuario.Cliente;
+import com.example.sistemaimobiliario.usuario.Corretor;
+import com.example.sistemaimobiliario.usuario.Pessoa;
 import com.example.sistemaimobiliario.utilitario.ListaClientes;
+import com.example.sistemaimobiliario.utilitario.ListaCorretor;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class CriarConta {
-    Scanner sc = new Scanner(System.in);
+    static Scanner sc = new Scanner(System.in);
 
-    public void criarContaCliente() {
-        System.out.println("Digite seu nome: ");
-        String nome = sc.nextLine();
+    public static String criarVariavel(String tipo) {
+        boolean achou;
+        String variavel;
+        List<Pessoa> usuarios = new ArrayList<>();
+        usuarios.addAll(ListaClientes.getListaClientes());
+        usuarios.addAll(ListaCorretor.getListaCorretores());
+        do {
+            System.out.println("Digite seu " + tipo + ": ");
+            variavel = sc.nextLine();
+            achou = false;
 
-        System.out.println("Digite seu CPF: ");
-        String cpf = sc.nextLine();
+            for(Pessoa usuario : usuarios){
+                switch (tipo.toLowerCase()) {
+                    case "cpf" :
+                        if(usuario.getCpf() != null && usuario.getCpf().equals(variavel)){
+                            System.out.println("Já existe uma conta com esse "+tipo+" cadastrada.");
+                            achou = true;
+                            break;
+                        }
+                        break;
+                    case "email" :
+                        if(usuario.getEmail() != null && usuario.getEmail().equals(variavel)){
+                            System.out.println("Já existe uma conta com esse "+tipo+" cadastrada.");
+                            achou = true;
+                            break;
+                        }
+                        break;
+                    case "telefone" :
+                        if(usuario.getTelefone() != null && usuario.getTelefone().equals(variavel)){
+                            System.out.println("Já existe uma conta com esse "+tipo+" cadastrada.");
+                            achou = true;
+                            break;
+                        }
+                        break;
+                    case "cnpj" :
+                        if (usuario instanceof Corretor){
+                            Corretor corretor = (Corretor) usuario;
+                            if(corretor.getCnpj() != null && corretor.getCnpj().equals(variavel)){
+                                System.out.println("Já existe uma conta com esse "+tipo+" cadastrada.");
+                                achou = true;
+                                break;
+                            }
+                            break;
+                        }
 
-        System.out.println("Digite seu telefone: ");
-        String telefone = sc.nextLine();
-
-        System.out.println("Digite seu email: ");
-        String email = sc.nextLine();
-
-        System.out.println("Digite sua senha: ");
-        String senha = sc.nextLine();
-
-        System.out.println("Verifique sua senha: ");
-        String senhaVerificada = sc.nextLine();
-
-        Cliente cliente = new Cliente(nome, cpf, telefone, email, senha);
-        for(Cliente clienteC : ListaClientes.getListaClientes()) {
-            if(clienteC.getCpf().equals(cliente.getCpf())) {
-                System.out.println("Já existe um cliente cadastrado com esse CPF.");
-                return;
+                    case "nomeEmpresa" :
+                        if (usuario instanceof Corretor){
+                            Corretor corretor = (Corretor) usuario;
+                            if(corretor.getNomeEmpresa().equals(variavel)){
+                                System.out.println("Já existe uma conta com esse "+tipo+" cadastrada.");
+                                achou = true;
+                                break;
+                            }
+                        }
+                        break;
+                }
+                if (achou) break;
             }
+        }while (achou);
+        return variavel;
+    }
+    public static String criarSenha(){
+        boolean senhaVerificada = false;
+        String senha;
+        String senhaV;
+        do{
+            System.out.println("Digite sua senha: ");
+            senha = sc.nextLine();
+            System.out.println("Verifique sua senha: ");
+            senhaV = sc.nextLine();
+            if(senha.equals(senhaV)){
+                senhaVerificada = true;
+            } else {
+                System.out.println("Verifique sua senha novamente.");
+            }
+        }while(!senhaVerificada);
+        return senha;
+    }
 
-        }
+    public static void criarContaCliente() {
+        String nome = criarVariavel("nome");
+        String cpf = criarVariavel("CPF");
+        String telefone = criarVariavel("telefone");
+        String email = criarVariavel("email");
+        String senha = criarSenha();
+        Cliente cliente = new Cliente(nome, cpf, telefone, email, senha);
+        ListaClientes.adicionarCliente(cliente);
+        System.out.println("Conta criada com sucesso!");
+    }
 
+    public static void criarContaCorretor() {
+        String nome = criarVariavel("nome");
+        String cpf = criarVariavel("CPF");
+        String telefone = criarVariavel("telefone");
+        String email = criarVariavel("email");
+        String cnpj = criarVariavel("CNPJ");
+        String empresaNome = criarVariavel("empresaNome");
+        String senha = criarSenha();
+        Corretor corretor = new Corretor(nome, cpf, telefone, email, senha, cnpj, empresaNome);
+        ListaCorretor.adicionarCorretor(corretor);
+        System.out.println("Conta criada com sucesso!");
     }
 }

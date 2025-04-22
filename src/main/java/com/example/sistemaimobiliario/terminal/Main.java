@@ -1,23 +1,58 @@
 package com.example.sistemaimobiliario.terminal;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import com.example.sistemaimobiliario.usuario.Cliente;
-import com.example.sistemaimobiliario.utilitario.BuscaImovel;
+import com.example.sistemaimobiliario.usuario.Pessoa;
+import com.example.sistemaimobiliario.utilitario.ListaClientes;
+import com.example.sistemaimobiliario.utilitario.ListaCorretor;
 
 public class Main {
     public static void main(String[] args){
-        Cliente cliente1 = new Cliente("Davi","065-055-933-90","85991912232", "davi.vieira@");
         Scanner sc = new Scanner(System.in);
-        System.out.println("Sistema de Imobiliário");
-        System.out.println("Bem-vindo ao sistema de gerenciamento imobiliário!");
-        System.out.println("Escolha uma opção:");
-        System.out.println("Preferencias(1-Casa, 2-Apartamento, 3-Venda, 4-Aluguel): ");
-        int opcao = sc.nextInt();
-        cliente1.addPreferencia(opcao);
-        BuscaImovel buscaImovel = new BuscaImovel();
-        buscaImovel.criaImoveisOrdenados(cliente1);
-        buscaImovel.resumoImovel();
+        int opcao;
+        do{
+            System.out.println("Sistema de Imobiliário");
+            System.out.println("Bem-vindo ao sistema de gerenciamento imobiliário!");
+            System.out.println("Escolha uma opção:");
+            System.out.println("1 - Criar conta Cliente");
+            System.out.println("2 - Cria conta Corretor");
+            System.out.println("3 - Log in");
+            System.out.println("4 - Sair");
+            opcao = sc.nextInt();
+            switch(opcao){
+                case 1:
+                    CriarConta.criarContaCliente();
+                    break;
+                case 2:
+                    CriarConta.criarContaCorretor();
+                case 3:
+                    System.out.println("Digite seu email: ");
+                    String email = sc.nextLine();
+                    System.out.println("Digite sua senha: ");
+                    String senha = sc.nextLine();
 
+                    List<Pessoa> usuarios = new ArrayList<>();
+                    usuarios.addAll(ListaClientes.getListaClientes());
+                    usuarios.addAll(ListaCorretor.getListaCorretores());
+                    Pessoa conta = null;
+                    boolean loginValido = false;
+                    for(Pessoa usuario : usuarios){
+                        if(usuario.getEmail().equals(email) && usuario.getSenha().equals(senha)){
+                            conta = usuario;
+                            loginValido = true;
+                            break;
+                        }
+                    }
 
+                    if(loginValido && conta instanceof Cliente contaCliente){
+                        MenuCliente.iniciaCliente(contaCliente);
+                    }
+                default :
+                    System.out.println("Opção invalida.");
+            }
+
+        }while(opcao != 4);
     }
 }
