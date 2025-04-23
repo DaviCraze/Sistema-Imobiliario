@@ -21,12 +21,14 @@ public class Main {
             System.out.println("3 - Log in");
             System.out.println("4 - Sair");
             opcao = sc.nextInt();
+            sc.nextLine();
             switch(opcao){
                 case 1:
                     CriarConta.criarContaCliente();
                     break;
                 case 2:
                     CriarConta.criarContaCorretor();
+                    break;
                 case 3:
                     System.out.println("Digite seu email: ");
                     String email = sc.nextLine();
@@ -49,6 +51,10 @@ public class Main {
                     if(loginValido && conta instanceof Cliente contaCliente){
                         MenuCliente.iniciaCliente(contaCliente);
                     }
+                    break;
+                case 4:
+                    System.out.println("Saindo....");
+                    break;
                 default :
                     System.out.println("Opção invalida.");
             }

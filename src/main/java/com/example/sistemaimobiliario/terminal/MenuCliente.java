@@ -10,6 +10,13 @@ public class MenuCliente {
 
     public static void iniciaCliente(Pessoa cliente){
         Cliente clienteC = (Cliente) cliente;
-        System.out.println("Bem vindo: "+clienteC.getNome());
+        int opcao;
+        do{
+            System.out.println("Bem vindo: "+clienteC.getNome());
+            System.out.println("1 - Ver perfil");
+            System.out.println("2 - Buscar Imoveis");
+            System.out.println("3 - Lista de Imoveis Favoritos");
+        }
+
     }
 }

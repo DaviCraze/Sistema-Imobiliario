@@ -48,8 +48,7 @@ public class CriarConta {
                         }
                         break;
                     case "cnpj" :
-                        if (usuario instanceof Corretor){
-                            Corretor corretor = (Corretor) usuario;
+                        if (usuario instanceof Corretor corretor){
                             if(corretor.getCnpj() != null && corretor.getCnpj().equals(variavel)){
                                 System.out.println("Já existe uma conta com esse "+tipo+" cadastrada.");
                                 achou = true;
@@ -58,10 +57,9 @@ public class CriarConta {
                             break;
                         }
 
-                    case "nomeEmpresa" :
-                        if (usuario instanceof Corretor){
-                            Corretor corretor = (Corretor) usuario;
-                            if(corretor.getNomeEmpresa().equals(variavel)){
+                    case "nomeempresa" :
+                        if (usuario instanceof Corretor corretor){
+                            if(corretor.getNomeEmpresa() != null && corretor.getNomeEmpresa().equals(variavel)){
                                 System.out.println("Já existe uma conta com esse "+tipo+" cadastrada.");
                                 achou = true;
                                 break;
@@ -74,6 +72,8 @@ public class CriarConta {
         }while (achou);
         return variavel;
     }
+
+
     public static String criarSenha(){
         boolean senhaVerificada = false;
         String senha;
@@ -94,7 +94,7 @@ public class CriarConta {
 
     public static void criarContaCliente() {
         String nome = criarVariavel("nome");
-        String cpf = criarVariavel("CPF");
+        String cpf = criarVariavel("cpf");
         String telefone = criarVariavel("telefone");
         String email = criarVariavel("email");
         String senha = criarSenha();
@@ -105,11 +105,11 @@ public class CriarConta {
 
     public static void criarContaCorretor() {
         String nome = criarVariavel("nome");
-        String cpf = criarVariavel("CPF");
+        String cpf = criarVariavel("cpf");
         String telefone = criarVariavel("telefone");
         String email = criarVariavel("email");
-        String cnpj = criarVariavel("CNPJ");
-        String empresaNome = criarVariavel("empresaNome");
+        String cnpj = criarVariavel("cnpj");
+        String empresaNome = criarVariavel("nomeempresa");
         String senha = criarSenha();
         Corretor corretor = new Corretor(nome, cpf, telefone, email, senha, cnpj, empresaNome);
         ListaCorretor.adicionarCorretor(corretor);
