@@ -32,16 +32,5 @@ public class Corretor extends Pessoa {
         super.exibirDetalhes();
         System.out.println("Nome da Empresa: " + nomeEmpresa);
         System.out.println("CNPJ: " + cnpj);
-        System.out.println("Interesses: ");
-        for(Interesse interesse : interesses){
-            System.out.println("Nome Cliente: " + interesse.getPessoa().getNome() + ", Telefone: " + interesse.getPessoa().getTelefone());
-            System.out.println("Imovel de Interesse: " + interesse.getImovel().getEndereco());
         }
     }
-
-    public void addPessoaInteressada(Pessoa pessoa, Imovel imovel) {
-        Interesse interesse = new Interesse(pessoa, imovel);
-        interesses.add(interesse);
-    }
-
-}

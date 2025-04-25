@@ -10,8 +10,8 @@ public class ListaImoveis {
     private static ArrayList<Imovel> listaImoveis = new ArrayList<>();
 
     static {
-        listaImoveis.add(new Casa("Rua Adolfo", 300000, 3, 2, 150, "Casa Verde na Praia", "Davi Vieira", "Venda-se/Aluga-se", true, true, false, ListaCorretor.getListaCorretores(0), "Casa", "Venda"));
-        listaImoveis.add(new Apartamento("Rua Adolfo", 300000, 3, 2, 150, "Apartamento Verde na Praia", "Davi Vieira", "Venda-se/Aluga-se", true, false, 7, ListaCorretor.getListaCorretores(1), "Apartamento", "Alugar"));
+        listaImoveis.add(new Casa("Rua Adolfo", 300000, 3, 2, 150, "Casa Verde na Praia", "Davi Vieira", "Venda-se/Aluga-se", true, true, false, "Casa", "Venda"));
+        listaImoveis.add(new Apartamento("Rua Adolfo", 300000, 3, 2, 150, "Apartamento Verde na Praia", "Davi Vieira", "Venda-se/Aluga-se", true, false, 7, "Apartamento", "Alugar"));
     }
 
     public ArrayList<Imovel> getListaImoveis() {

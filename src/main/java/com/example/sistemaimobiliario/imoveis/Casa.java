@@ -7,15 +7,15 @@ public class Casa extends Imovel{
     private boolean temGaragem;
     private int andares;
 
-    public Casa(String endereco, double preco, int quartos, int banheiros, double area, String descricao, String proprietario, String status, boolean temQuintal, boolean temGaragem, boolean temPiscina, Corretor corretor, String tipoImovel, String tipoVenda) {
-        super(endereco, preco, quartos, banheiros, area, descricao, proprietario, status, corretor, tipoImovel, tipoVenda);
+    public Casa(String endereco, double preco, int quartos, int banheiros, double area, String descricao, String proprietario, String status, boolean temQuintal, boolean temGaragem, boolean temPiscina, String tipoImovel, String tipoVenda) {
+        super(endereco, preco, quartos, banheiros, area, descricao, proprietario, status, tipoImovel, tipoVenda);
         if(temQuintal) {setTags("Tem quintal");}
         if(temPiscina) {setTags("Tem piscina");}
         if(temGaragem) {setTags("Tem garagem");}
     }
 
-    public Casa(String endereco, double preco, int quartos, int banheiros, double area, String descricao, String proprietario, String status, boolean temQuintal, boolean temGaragem, boolean temPiscina, int andar, Corretor corretor, String tipoImovel, String tipoVenda) {
-        super(endereco, preco, quartos, banheiros, area, descricao, proprietario, status, corretor, tipoImovel, tipoVenda);
+    public Casa(String endereco, double preco, int quartos, int banheiros, double area, String descricao, String proprietario, String status, boolean temQuintal, boolean temGaragem, boolean temPiscina, int andar, String tipoImovel, String tipoVenda) {
+        super(endereco, preco, quartos, banheiros, area, descricao, proprietario, status, tipoImovel, tipoVenda);
         if(temQuintal) {setTags("Tem quintal");}
         if(temPiscina) {setTags("Tem piscina");}
         if(temGaragem) {setTags("Tem garagem");}

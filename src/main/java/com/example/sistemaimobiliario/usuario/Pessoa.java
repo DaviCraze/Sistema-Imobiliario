@@ -29,9 +29,15 @@ public abstract class Pessoa {
 
     public String getSenha() {return senha;}
 
-    public void exibirDetalhes() {
+    public void exibirDetalhesPerfil() {
         System.out.println("Nome: " + nome);
         System.out.println("CPF: " + cpf);
+        System.out.println("Telefone: " + telefone);
+        System.out.println("Email: " + email);
+    }
+
+    public void exibirDetalhes() {
+        System.out.println("Nome: " + nome);
         System.out.println("Telefone: " + telefone);
         System.out.println("Email: " + email);
     }

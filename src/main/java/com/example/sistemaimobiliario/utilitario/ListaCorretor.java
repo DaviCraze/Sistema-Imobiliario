@@ -17,6 +17,6 @@ public class ListaCorretor {
     }
     public static ArrayList<Corretor> getListaCorretores() {return listaDeCorretores;}
 
-    public static Corretor getListaCorretores(int i) {return listaDeCorretores.get(i);}
+    public static Corretor getListaCorretoresPorID(int i) {return listaDeCorretores.get(i);}
 
 }

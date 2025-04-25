@@ -102,7 +102,11 @@ public class Cliente extends Pessoa{
     }
 
     public void removePreferencia(String preferencia){
+        if(preferencias.contains(preferencia)) {
             preferencias.remove(preferencia);
+        } else {
+            System.out.println("Esta preferencia não está na sua lista de preferencias.");
+        }
     }
 
     public void ordenaImoveisCliente(){

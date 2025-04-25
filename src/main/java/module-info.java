@@ -7,6 +7,7 @@ module com.example.sistemaimobiliario {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires java.sql;
 
     opens com.example.sistemaimobiliario to javafx.fxml;
     exports com.example.sistemaimobiliario;

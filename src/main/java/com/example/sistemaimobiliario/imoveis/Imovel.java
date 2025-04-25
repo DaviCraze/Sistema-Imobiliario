@@ -13,13 +13,13 @@ public abstract class Imovel {
     private String descricao;
     private String proprietario;
     private String status;
-    private Corretor corretor;
+    private List<Corretor> corretores = new ArrayList<>();
     private static int contador = 0;
     private List<String> tags = new ArrayList<>();
     private String tipoImovel;
     private String tipoVenda;
 
-    public Imovel(String endereco, double preco, int quartos, int banheiros, double area, String descricao, String proprietario, String status, Corretor corretor, String tipoImovel, String tipoVenda) {
+    public Imovel(String endereco, double preco, int quartos, int banheiros, double area, String descricao, String proprietario, String status, String tipoImovel, String tipoVenda) {
         this.endereco = endereco;
         this.preco = preco;
         this.quartos = quartos;
@@ -28,7 +28,6 @@ public abstract class Imovel {
         this.descricao = descricao;
         this.proprietario = proprietario;
         this.status = status;
-        this.corretor = corretor;
         tags.add(tipoImovel);
         tags.add(tipoVenda);
         this.tipoImovel = tipoImovel;
@@ -60,8 +59,8 @@ public abstract class Imovel {
     public String getStatus() {return status;}
     public void setStatus(String status) {this.status = status;}
 
-    public Corretor getCorretor() {return corretor;}
-    public void setCorretor(Corretor corretor) {this.corretor = corretor;}
+    public List<Corretor> getCorretores() {return corretores;}
+    public void addCorretor(Corretor corretor) {this.corretores.add(corretor);}
 
     public List<String> getTags() {return tags;}
     public void setTags(String tags) {this.tags.add(tags);}
@@ -75,7 +74,7 @@ public abstract class Imovel {
         System.out.println("Descrição: " + descricao);
         System.out.println("Proprietário: " + proprietario);
         System.out.println("Status: " + status);
-        corretor.exibirDetalhes();
+
     }
 
     public void exibirResumo(){

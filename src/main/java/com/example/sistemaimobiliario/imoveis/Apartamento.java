@@ -7,14 +7,14 @@ public class Apartamento extends Imovel{
     private boolean temSacada;
     private int andar;
 
-    public Apartamento(String endereco, double preco, int quartos, int banheiros, double area, String descricao, String proprietario, String status, boolean temElevador, boolean temSacada, Corretor corretor, String tipoImovel, String tipoVenda) {
-        super(endereco, preco, quartos, banheiros, area, descricao, proprietario, status, corretor, tipoImovel, tipoVenda);
+    public Apartamento(String endereco, double preco, int quartos, int banheiros, double area, String descricao, String proprietario, String status, boolean temElevador, boolean temSacada, String tipoImovel, String tipoVenda) {
+        super(endereco, preco, quartos, banheiros, area, descricao, proprietario, status, tipoImovel, tipoVenda);
         if(temElevador) {setTags("Tem elevador");}
         if(temSacada) {setTags("Tem sacada");}
     }
 
-    public Apartamento(String endereco, double preco, int quartos, int banheiros, double area, String descricao, String proprietario, String status, boolean temElevador, boolean temSacada, int andar, Corretor corretor, String tipoImovel, String tipoVenda) {
-        super(endereco, preco, quartos, banheiros, area, descricao, proprietario, status, corretor, tipoImovel, tipoVenda);
+    public Apartamento(String endereco, double preco, int quartos, int banheiros, double area, String descricao, String proprietario, String status, boolean temElevador, boolean temSacada, int andar, String tipoImovel, String tipoVenda) {
+        super(endereco, preco, quartos, banheiros, area, descricao, proprietario, status, tipoImovel, tipoVenda);
         if(temElevador) {setTags("Tem elevador");}
         if(temSacada) {setTags("Tem sacada");}
         this.andar = andar;
