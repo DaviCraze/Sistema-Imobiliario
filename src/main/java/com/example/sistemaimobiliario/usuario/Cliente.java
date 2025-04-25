@@ -5,6 +5,8 @@ import com.example.sistemaimobiliario.utilitario.ListaImoveis;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
 //Alocar classe BuscaImoveis na classe Cliente
 public class Cliente extends Pessoa{
     private List<Interesse> interesses;
@@ -118,6 +120,49 @@ public class Cliente extends Pessoa{
                 imoveisOrdenados.add(imovel);
             }
 
+        }
+    }
+
+    public void exibirImoveisPaginados(List<Imovel> imoveisLista){
+        Scanner sc = new Scanner(System.in);
+        int totalImoveis = imoveisLista.size();
+        int totalPaginas = (int) Math.ceil(totalImoveis / 10);
+        int paginaAtual = 1;
+
+        while (true) {
+            System.out.println("Pagina "+ paginaAtual +"/"+ totalPaginas);
+            System.out.println("--------------------------------------------------------------");
+            int inicio = (paginaAtual - 1) * 10;
+            int fim = Math.min(inicio + 10, totalImoveis);
+
+            for(int i = inicio; i < fim; i++){
+                System.out.print((i + 1) + " - ");
+                imoveisLista.get(i).exibirResumo();
+            }
+            System.out.println("--------------------------------------------------------------");
+            System.out.println("Digite o numero do imovel(1 - 10) ou:");
+            System.out.println("[N] - Proxima pagina | [P] - Voltar a pagina anterior | [S] - Sair");
+            String opcao = sc.nextLine();
+
+            if(opcao.equalsIgnoreCase("N") && paginaAtual < totalPaginas) {
+                paginaAtual++;
+            } else if (opcao.equalsIgnoreCase("P") && paginaAtual > 1) {
+                paginaAtual--;
+            } else if (opcao.equalsIgnoreCase("S")) {
+                break;
+            } else {
+                try {
+                    int escolha = Integer.parseInt(opcao);
+                    if(escolha >= 1 && escolha <= 10 && inicio + escolha - 1 < totalImoveis) {
+                        Imovel imovelSelecionado = imoveisLista.get(inicio + escolha - 1);
+                        imovelSelecionado.exibirDetalhes();
+                    } else {
+                        System.out.println("Escolha invalida.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Escolha invalida.");
+                }
+            }
         }
     }
 }

@@ -77,4 +77,9 @@ public abstract class Imovel {
         System.out.println("Status: " + status);
         corretor.exibirDetalhes();
     }
+
+    public void exibirResumo(){
+        System.out.println("Endereço: "+ endereco);
+        System.out.println("Preferencias: "+tags);
+    }
 }

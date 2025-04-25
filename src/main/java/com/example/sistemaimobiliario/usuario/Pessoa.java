@@ -1,6 +1,6 @@
 package com.example.sistemaimobiliario.usuario;
 
-public abstract class Pessoa implements Usuario{
+public abstract class Pessoa {
     private String nome;
     private String cpf;
     private String telefone;

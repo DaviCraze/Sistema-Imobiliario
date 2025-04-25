@@ -7,16 +7,20 @@ import com.example.sistemaimobiliario.imoveis.Apartamento;
 
 public class ListaImoveis {
 
-    private ArrayList<Imovel> listaImoveis = new ArrayList<>();
-    Imovel imovel1 = new Casa("Rua Adolfo", 300000, 3, 2, 150, "Casa Verde na Praia", "Davi Vieira", "Venda-se/Aluga-se", true, true, false, ListaCorretor.getListaCorretores(0), "Casa", "Venda");
-    Imovel imovel2 = new Apartamento("Rua Adolfo", 300000, 3, 2, 150, "Apartamento Verde na Praia", "Davi Vieira", "Venda-se/Aluga-se", true, false, 7, ListaCorretor.getListaCorretores(1), "Apartamento", "Alugar");
+    private static ArrayList<Imovel> listaImoveis = new ArrayList<>();
 
-    public ListaImoveis() {
-        listaImoveis.add(imovel1);
-        listaImoveis.add(imovel2);
+    static {
+        listaImoveis.add(new Casa("Rua Adolfo", 300000, 3, 2, 150, "Casa Verde na Praia", "Davi Vieira", "Venda-se/Aluga-se", true, true, false, ListaCorretor.getListaCorretores(0), "Casa", "Venda"));
+        listaImoveis.add(new Apartamento("Rua Adolfo", 300000, 3, 2, 150, "Apartamento Verde na Praia", "Davi Vieira", "Venda-se/Aluga-se", true, false, 7, ListaCorretor.getListaCorretores(1), "Apartamento", "Alugar"));
     }
 
     public ArrayList<Imovel> getListaImoveis() {
         return listaImoveis;
+    }
+
+    public void printaImoveis() {
+        for(Imovel imovel : listaImoveis) {
+            imovel.exibirResumo();
+        }
     }
 }
