@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 //Alocar classe BuscaImoveis na classe Cliente
 public class Cliente extends Pessoa{
+    Scanner sc = new Scanner(System.in);
     private List<Interesse> interesses;
     private List<String> preferencias;
     private List<Imovel> imoveisOrdenados;
@@ -23,6 +24,8 @@ public class Cliente extends Pessoa{
     public List<Interesse> getInteresses() {return interesses;}
 
     public List<String> getPreferencias() {return preferencias;}
+
+    public List<Imovel> getImoveisOrdenados() {return imoveisOrdenados;}
 
     public void addImovelInteresse(Imovel imovel) {
         if(!interesses.contains(imovel)){
@@ -47,65 +50,83 @@ public class Cliente extends Pessoa{
                 } else {
                     System.out.println("Preferencia já adicionada(Casa)");
                 }
+                break;
             case 2 :
                 if(!preferencias.contains("Apartamento")){
                     preferencias.add("Apartamento");
                 } else {
                     System.out.println("Preferencia já adicionada(Apartamento)");
                 }
+                break;
             case 3 :
                 if(!preferencias.contains("Venda")){
                     preferencias.add("Venda");
                 } else {
                     System.out.println("Preferencia já adicionada(Venda)");
                 }
+                break;
             case 4 :
-                if(!preferencias.contains("Aluguel")){
-                    preferencias.add("Aluguel");
+                if(!preferencias.contains("Alugar")){
+                    preferencias.add("Alugar");
                 } else {
                     System.out.println("Preferencia já adicionada(Aluguel)");
                 }
+                break;
             case 5 :
                 if(!preferencias.contains("Tem piscina")){
                     preferencias.add("Tem piscina");
                 } else {
                     System.out.println("Preferencia já adicionada(Tem piscina)");
                 }
+                break;
             case 6 :
                 if(!preferencias.contains("Tem quintal")){
                     preferencias.add("Tem quintal");
                 } else {
                     System.out.println("Preferencia já adiconada(Tem quintal");
                 }
+                break;
             case 7 :
                 if(!preferencias.contains("Tem garagem")){
                     preferencias.add("Tem garagem");
                 } else {
                     System.out.println("Preferencia já adicionada(Tem garagem)");
                 }
+                break;
             case 8 :
                 if(!preferencias.contains("Tem elevador")){
                     preferencias.add("Tem elevador");
                 } else {
                     System.out.println("Preferencia já adicionada(Tem elevador)");
                 }
+                break;
             case 9 :
                 if(!preferencias.contains("Tem sacada")){
                     preferencias.add("Tem sacada");
                 } else {
                     System.out.println("Preferencia já adicionada(Tem sacada)");
                 }
+                break;
             default :
                 System.out.println("Preferência inválida.");
+                break;
         }
 
     }
 
-    public void removePreferencia(String preferencia){
-        if(preferencias.contains(preferencia)) {
-            preferencias.remove(preferencia);
+    public void removePreferencia(){
+        int tamanhoPreferencias = preferencias.size();
+        System.out.println("Preferencias atuais:");
+        for(int i = 0; i < tamanhoPreferencias; i++){
+            System.out.println((i + 1) + " - " + preferencias.get(i));
+        }
+        System.out.println("Escolha a preferencia que deseja remover("+1+" a "+tamanhoPreferencias+"): ");
+        int opcao = sc.nextInt();
+
+        if(opcao >= 1 && tamanhoPreferencias > opcao){
+            preferencias.remove(opcao - 1);
         } else {
-            System.out.println("Esta preferencia não está na sua lista de preferencias.");
+            System.out.println("Opção invalida.");
         }
     }
 
@@ -128,9 +149,11 @@ public class Cliente extends Pessoa{
     }
 
     public void exibirImoveisPaginados(List<Imovel> imoveisLista){
-        Scanner sc = new Scanner(System.in);
         int totalImoveis = imoveisLista.size();
         int totalPaginas = (int) Math.ceil(totalImoveis / 10);
+        if(totalPaginas == 0) {
+            totalPaginas = 1;
+        }
         int paginaAtual = 1;
 
         while (true) {
