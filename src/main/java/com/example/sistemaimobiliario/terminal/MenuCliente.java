@@ -123,6 +123,7 @@ public class MenuCliente {
                                         case 3:
                                             clienteC.ordenaImoveisCliente();
                                             clienteC.exibirImoveisPaginados(clienteC.getImoveisOrdenados());
+
                                             break;
                                         case 4:
                                             executando1 = false;
@@ -160,7 +161,7 @@ public class MenuCliente {
                         break;
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Digite um numero inteiro entre 1 e 4");
+                System.out.println("Digite um numero inteiro.");
                 sc.nextLine();
             }
             }while(executando);

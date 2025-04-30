@@ -1,6 +1,7 @@
 package com.example.sistemaimobiliario.usuario;
 
 import com.example.sistemaimobiliario.imoveis.Imovel;
+import com.example.sistemaimobiliario.utilitario.ListaCorretor;
 import com.example.sistemaimobiliario.utilitario.ListaImoveis;
 
 import java.util.ArrayList;
@@ -10,33 +11,33 @@ import java.util.Scanner;
 //Alocar classe BuscaImoveis na classe Cliente
 public class Cliente extends Pessoa{
     Scanner sc = new Scanner(System.in);
-    private List<Interesse> interesses;
+    private List<Imovel> imoveisFavoritos;
     private List<String> preferencias;
     private List<Imovel> imoveisOrdenados;
 
     public Cliente(String nome, String cpf, String telefone, String email, String senha) {
         super(nome, cpf, telefone, email, senha);
-        this.interesses = new ArrayList<>();
+        this.imoveisFavoritos = new ArrayList<>();
         this.preferencias = new ArrayList<>();
         this.imoveisOrdenados = new ArrayList<>();
     }
 
-    public List<Interesse> getInteresses() {return interesses;}
+    public List<Imovel> getImoveisFavoritos() {return imoveisFavoritos;}
 
     public List<String> getPreferencias() {return preferencias;}
 
     public List<Imovel> getImoveisOrdenados() {return imoveisOrdenados;}
 
-    public void addImovelInteresse(Imovel imovel) {
-        if(!interesses.contains(imovel)){
-            interesses.add(new Interesse(imovel));
+    public void addImovelFavorito(Imovel imovel) {
+        if(!imoveisFavoritos.contains(imovel)){
+            imoveisFavoritos.add(imovel);
         }
     }
 
-    public void removeImovelInteresse(Imovel imovel){
-        for(Interesse interesse : interesses){
-            if(interesse.getImovel().equals(imovel)){
-                interesses.remove(interesse);
+    public void removeImovelFavorito(Imovel imovel){
+        for(Imovel imovelF : imoveisFavoritos){
+            if(imovelF.getEndereco().equals(imovel.getEndereco())){
+                imoveisFavoritos.remove(imovelF);
                 break;
             }
         }
@@ -148,6 +149,47 @@ public class Cliente extends Pessoa{
         }
     }
 
+    public void exibirCorretores(){
+        int totalCorretores = ListaCorretor.getListaCorretores().size();
+        int totalPaginas = (int) Math.ceil(totalCorretores / 10);
+        if(totalPaginas == 0) {
+            totalPaginas = 1;
+        }
+        int paginaAtual = 1;
+
+        while (true) {
+            System.out.println("Pagina "+paginaAtual+"/"+totalPaginas);
+            System.out.println("---------------------------------------------------------------");
+            int inicio = (paginaAtual - 1) * 10;
+            int fim = Math.min(inicio + 10, totalCorretores);
+
+            for(int i = inicio; i < fim; i++){
+                System.out.print((i + 1) + " - ");
+                ListaCorretor.getListaCorretores().get(i).exibirResumo();
+            }
+            System.out.println("---------------------------------------------------------------");
+            System.out.println("Digite o numero do corretor(1 - "+fim+") ou:");
+            System.out.println("[N] - Proxima pagina | [P] - Voltar a pagina anterior | [S] - Sair");
+            String opcao = sc.nextLine();
+
+            if(opcao.equalsIgnoreCase("N") && paginaAtual < totalPaginas) {
+                paginaAtual++;
+            } else if(opcao.equalsIgnoreCase("P") && paginaAtual > 1) {
+                paginaAtual--;
+            } else if(opcao.equalsIgnoreCase("S")){
+                break;
+            } else {
+                try {
+                    int escolha = Integer.parseInt(opcao);
+                    if(escolha >= 1 && escolha <= fim ){
+                        Corretor corretorSelecionado = ListaCorretor.getListaCorretoresPorID(inicio + escolha - 1);
+                        corretorSelecionado.exibirDetalhes();
+                    }
+                }
+            }
+        }
+    }
+
     public void exibirImoveisPaginados(List<Imovel> imoveisLista){
         int totalImoveis = imoveisLista.size();
         int totalPaginas = (int) Math.ceil(totalImoveis / 10);
@@ -167,7 +209,7 @@ public class Cliente extends Pessoa{
                 imoveisLista.get(i).exibirResumo();
             }
             System.out.println("--------------------------------------------------------------");
-            System.out.println("Digite o numero do imovel(1 - 10) ou:");
+            System.out.println("Digite o numero do imovel(1 - "+fim+") ou:");
             System.out.println("[N] - Proxima pagina | [P] - Voltar a pagina anterior | [S] - Sair");
             String opcao = sc.nextLine();
 
@@ -183,6 +225,14 @@ public class Cliente extends Pessoa{
                     if(escolha >= 1 && escolha <= 10 && inicio + escolha - 1 < totalImoveis) {
                         Imovel imovelSelecionado = imoveisLista.get(inicio + escolha - 1);
                         imovelSelecionado.exibirDetalhes();
+                        System.out.println("Deseja adicionar ao favoritos? (S/N)");
+                        String opcao2 = sc.nextLine();
+                        if(opcao2.equalsIgnoreCase("s")) {
+                            addImovelFavorito(imovelSelecionado);
+                            System.out.println("Imovel adicionado a sua lista de favoritos.");
+                        } else if(opcao2.equalsIgnoreCase("n")) {
+                            break;
+                        }
                     } else {
                         System.out.println("Escolha invalida.");
                     }

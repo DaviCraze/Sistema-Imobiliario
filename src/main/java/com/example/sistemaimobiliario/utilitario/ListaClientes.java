@@ -42,15 +42,16 @@ public class ListaClientes implements IRepositorio {
 
     }
     @Override
-    public void busca(String cpf) {
+    public Cliente busca(String cpf) {
         for(Cliente clienteC : listaClientes){
             if(clienteC.getCpf().equals(cpf)) {
-                clienteC.exibirDetalhes();
-                return;
+                return clienteC;
             }
         }
         System.out.println("Cliente não encontrado");
+        return null;
     }
+
 
     public static ArrayList<Cliente> getListaClientes() {
         return listaClientes;

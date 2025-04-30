@@ -47,14 +47,14 @@ public class ListaCorretor implements IRepositorio {
     }
 
     @Override
-    public void busca(String cpf) {
+    public Corretor busca(String cpf) {
         for(Corretor corretor : listaDeCorretores){
             if(corretor.getCpf().equals(cpf)) {
-                corretor.exibirDetalhes();
-                return;
+                return corretor;
             }
         }
         System.out.println("Corretor não encontrado na lista.");
+        return null;
     }
 
     public static ArrayList<Corretor> getListaCorretores() {return listaDeCorretores;}

@@ -32,5 +32,10 @@ public class Corretor extends Pessoa {
         super.exibirDetalhes();
         System.out.println("Nome da Empresa: " + nomeEmpresa);
         System.out.println("CNPJ: " + cnpj);
-        }
     }
+
+    public void exibirResumo(){
+        System.out.println("Nome da Empresa: "+ nomeEmpresa);
+        System.out.println("CNPJ: " + cnpj);
+    }
+}

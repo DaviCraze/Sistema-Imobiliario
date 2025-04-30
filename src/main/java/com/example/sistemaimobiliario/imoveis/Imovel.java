@@ -65,6 +65,12 @@ public abstract class Imovel {
     public List<String> getTags() {return tags;}
     public void setTags(String tags) {this.tags.add(tags);}
 
+    public void adicionarCorretor(Corretor corretor) {
+        if(!corretores.contains(corretor)) {
+            corretores.add(corretor);
+        }
+    }
+
     public void exibirDetalhes() {
         System.out.println("Endereço: " + endereco);
         System.out.println("Preço: " + preco);
