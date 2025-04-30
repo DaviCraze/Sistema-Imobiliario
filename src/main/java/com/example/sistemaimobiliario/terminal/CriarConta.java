@@ -93,17 +93,19 @@ public class CriarConta {
     }
 
     public static void criarContaCliente() {
+        ListaClientes listaClientes = new ListaClientes();
         String nome = criarVariavel("nome");
         String cpf = criarVariavel("cpf");
         String telefone = criarVariavel("telefone");
         String email = criarVariavel("email");
         String senha = criarSenha();
         Cliente cliente = new Cliente(nome, cpf, telefone, email, senha);
-        ListaClientes.adicionarCliente(cliente);
+        listaClientes.add(cliente);
         System.out.println("Conta criada com sucesso!");
     }
 
     public static void criarContaCorretor() {
+        ListaCorretor listaCorretor = new ListaCorretor();
         String nome = criarVariavel("nome");
         String cpf = criarVariavel("cpf");
         String telefone = criarVariavel("telefone");
@@ -112,7 +114,7 @@ public class CriarConta {
         String empresaNome = criarVariavel("nomeempresa");
         String senha = criarSenha();
         Corretor corretor = new Corretor(nome, cpf, telefone, email, senha, cnpj, empresaNome);
-        ListaCorretor.adicionarCorretor(corretor);
+        listaCorretor.add(corretor);
         System.out.println("Conta criada com sucesso!");
     }
 }

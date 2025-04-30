@@ -9,6 +9,9 @@ public class Casa extends Imovel{
 
     public Casa(String endereco, double preco, int quartos, int banheiros, double area, String descricao, String proprietario, String status, boolean temQuintal, boolean temGaragem, boolean temPiscina, String tipoImovel, String tipoVenda) {
         super(endereco, preco, quartos, banheiros, area, descricao, proprietario, status, tipoImovel, tipoVenda);
+        this.temQuintal = temQuintal;
+        this.temPiscina = temPiscina;
+        this.temGaragem = temGaragem;
         if(temQuintal) {setTags("Tem quintal");}
         if(temPiscina) {setTags("Tem piscina");}
         if(temGaragem) {setTags("Tem garagem");}
@@ -16,6 +19,9 @@ public class Casa extends Imovel{
 
     public Casa(String endereco, double preco, int quartos, int banheiros, double area, String descricao, String proprietario, String status, boolean temQuintal, boolean temGaragem, boolean temPiscina, int andar, String tipoImovel, String tipoVenda) {
         super(endereco, preco, quartos, banheiros, area, descricao, proprietario, status, tipoImovel, tipoVenda);
+        this.temQuintal = temQuintal;
+        this.temPiscina = temPiscina;
+        this.temGaragem = temGaragem;
         if(temQuintal) {setTags("Tem quintal");}
         if(temPiscina) {setTags("Tem piscina");}
         if(temGaragem) {setTags("Tem garagem");}
@@ -28,9 +34,9 @@ public class Casa extends Imovel{
     @Override
     public void exibirDetalhes() {
         super.exibirDetalhes();
-        System.out.println("Tem Quintal: "+temQuintal);
-        System.out.println("Tem Garagem: "+temGaragem);
-        System.out.println("Tem Piscina: "+temPiscina);
+        System.out.println("Tem Quintal: "+ (temQuintal ? "Sim" : "Não"));
+        System.out.println("Tem Garagem: "+ (temGaragem ? "Sim" : "Não"));
+        System.out.println("Tem Piscina: "+ (temPiscina ? "Sim" : "Não"));
         System.out.println("Andares: " + andares);
     }
 }
