@@ -4,7 +4,7 @@ import com.example.sistemaimobiliario.usuario.Cliente;
 import com.example.sistemaimobiliario.usuario.Pessoa;
 import com.example.sistemaimobiliario.utilitario.ListaImoveis;
 
-import java.sql.Array;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -31,14 +31,44 @@ public class MenuCliente {
                     case 1:
                         System.out.println("Perfil do cliente: ");
                         clienteC.exibirDetalhesPerfil();
+                        System.out.println("1 - Editar perfil");
+                        System.out.println("2 - Voltar");
+                        int opcao1 = sc.nextInt();
+                        sc.nextLine();
+                        switch (opcao1) {
+                            case 1:
+                                System.out.println("1 - Nome");
+                                System.out.println("2 - Telefone");
+                                System.out.println("3 - Voltar");
+                                int opcao2 = sc.nextInt();
+                                sc.nextLine();
+                                switch (opcao2) {
+                                    case 1:
+                                        String novoNome = CriarConta.criarVariavel("nome");
+                                        clienteC.setNome(novoNome);
+                                        System.out.println("Nome alterado com sucesso!");
+                                        break;
+                                    case 2:
+                                        String novoTelefone = CriarConta.criarVariavel("telefone");
+                                        clienteC.setTelefone(novoTelefone);
+                                        System.out.println("Telefone alterado com sucesso!");
+                                        break;
+                                    case 3:
+                                        break;
+                                    default:
+                                        System.out.println("Digite um numero inteiro.");
+                                }
+                            case 2:
+                                break;
+                        }
                         break;
                     case 2:
                         System.out.println("1 - Todos os Imoveis");
                         System.out.println("2 - Filtrar imoveis");
                         System.out.println("3 - Voltar");
-                        int opcao1 = sc.nextInt();
+                        int opcao3 = sc.nextInt();
                         sc.nextLine();
-                        switch (opcao1) {
+                        switch (opcao3) {
                             case 1:
                                 System.out.println("Todos os imoveis disponiveis: ");
                                 ListaImoveis listaImoveis = new ListaImoveis();
@@ -62,9 +92,9 @@ public class MenuCliente {
                                     System.out.println("2 - Remover Preferencia");
                                     System.out.println("3 - Mostrar Imoveis de acordo com as preferencias");
                                     System.out.println("4 - Voltar");
-                                    int opcao2 = sc.nextInt();
+                                    int opcao4 = sc.nextInt();
                                     sc.nextLine();
-                                    switch (opcao2) {
+                                    switch (opcao4) {
                                         case 1:
                                             boolean executando2 = true;
                                             while (executando2) {
@@ -78,9 +108,9 @@ public class MenuCliente {
                                                 System.out.println("8 - Tem elevador");
                                                 System.out.println("9 - Tem sacada");
                                                 System.out.println("10 - Voltar");
-                                                int opcao3 = sc.nextInt();
+                                                int opcao5 = sc.nextInt();
                                                 sc.nextLine();
-                                                switch (opcao3) {
+                                                switch (opcao5) {
                                                     case 1:
                                                         clienteC.addPreferencia(1);
                                                         break;
@@ -141,16 +171,16 @@ public class MenuCliente {
                         }
                         break;
                     case 3:
-                        System.out.println("Função não implementada.");
+                        clienteC.exibirImoveisPaginados(clienteC.getImoveisFavoritos());
                         break;
                     case 4:
                         System.out.println("Tem certeza que deseja sair? (S/N)");
-                        String opcao4 = sc.nextLine();
+                        String opcao6 = sc.nextLine();
 
-                        if (opcao4.equalsIgnoreCase("s")) {
+                        if (opcao6.equalsIgnoreCase("s")) {
                             System.out.println("Saindo...");
                             executando = false;
-                        } else if (opcao4.equalsIgnoreCase("n")) {
+                        } else if (opcao6.equalsIgnoreCase("n")) {
                             System.out.println("Voltando ao menu...");
                         } else {
                             System.out.println("Opção invalida.");

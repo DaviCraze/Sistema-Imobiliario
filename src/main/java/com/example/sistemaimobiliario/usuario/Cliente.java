@@ -31,6 +31,8 @@ public class Cliente extends Pessoa{
     public void addImovelFavorito(Imovel imovel) {
         if(!imoveisFavoritos.contains(imovel)){
             imoveisFavoritos.add(imovel);
+        } else {
+            System.out.println("Imovel ja está adicionado a sua lista de favoritos.");
         }
     }
 
@@ -39,6 +41,8 @@ public class Cliente extends Pessoa{
             if(imovelF.getEndereco().equals(imovel.getEndereco())){
                 imoveisFavoritos.remove(imovelF);
                 break;
+            } else {
+                System.out.println("Esse imovel não pertence a sua lista de favoritos.");
             }
         }
     }
@@ -149,8 +153,8 @@ public class Cliente extends Pessoa{
         }
     }
 
-    public void exibirCorretores(){
-        int totalCorretores = ListaCorretor.getListaCorretores().size();
+    public void exibirCorretores(Imovel imovel){
+        int totalCorretores = imovel.getCorretores().size();
         int totalPaginas = (int) Math.ceil(totalCorretores / 10);
         if(totalPaginas == 0) {
             totalPaginas = 1;
@@ -165,7 +169,7 @@ public class Cliente extends Pessoa{
 
             for(int i = inicio; i < fim; i++){
                 System.out.print((i + 1) + " - ");
-                ListaCorretor.getListaCorretores().get(i).exibirResumo();
+                imovel.getCorretores().get(i).exibirResumo();
             }
             System.out.println("---------------------------------------------------------------");
             System.out.println("Digite o numero do corretor(1 - "+fim+") ou:");
@@ -177,14 +181,16 @@ public class Cliente extends Pessoa{
             } else if(opcao.equalsIgnoreCase("P") && paginaAtual > 1) {
                 paginaAtual--;
             } else if(opcao.equalsIgnoreCase("S")){
-                break;
+                System.out.println("Saindo...");
             } else {
                 try {
                     int escolha = Integer.parseInt(opcao);
                     if(escolha >= 1 && escolha <= fim ){
-                        Corretor corretorSelecionado = ListaCorretor.getListaCorretoresPorID(inicio + escolha - 1);
+                        Corretor corretorSelecionado = imovel.getCorretores().get(inicio + escolha - 1);
                         corretorSelecionado.exibirDetalhes();
                     }
+                } catch (NumberFormatException e) {
+                    System.out.println("Digite um numero valido.");
                 }
             }
         }
@@ -225,13 +231,20 @@ public class Cliente extends Pessoa{
                     if(escolha >= 1 && escolha <= 10 && inicio + escolha - 1 < totalImoveis) {
                         Imovel imovelSelecionado = imoveisLista.get(inicio + escolha - 1);
                         imovelSelecionado.exibirDetalhes();
-                        System.out.println("Deseja adicionar ao favoritos? (S/N)");
+                        System.out.println("1 - Adicionar aos favoritos");
+                        System.out.println("2 - Remover dos favoritos");
+                        System.out.println("3 - Exibir corretores");
+                        System.out.println("4 - Voltar");
                         String opcao2 = sc.nextLine();
-                        if(opcao2.equalsIgnoreCase("s")) {
+                        if(opcao2.equalsIgnoreCase("1")) {
                             addImovelFavorito(imovelSelecionado);
                             System.out.println("Imovel adicionado a sua lista de favoritos.");
-                        } else if(opcao2.equalsIgnoreCase("n")) {
-                            break;
+                        } else if(opcao2.equalsIgnoreCase("2")) {
+                            removeImovelFavorito(imovelSelecionado);
+                        } else if(opcao2.equalsIgnoreCase("3")) {
+                            exibirCorretores(imovelSelecionado);
+                        } else if(opcao2.equalsIgnoreCase("4")) {
+                            System.out.println("Voltando...");
                         }
                     } else {
                         System.out.println("Escolha invalida.");

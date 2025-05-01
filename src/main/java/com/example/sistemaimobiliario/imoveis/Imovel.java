@@ -60,16 +60,15 @@ public abstract class Imovel {
     public void setStatus(String status) {this.status = status;}
 
     public List<Corretor> getCorretores() {return corretores;}
-    public void addCorretor(Corretor corretor) {this.corretores.add(corretor);}
-
-    public List<String> getTags() {return tags;}
-    public void setTags(String tags) {this.tags.add(tags);}
-
     public void adicionarCorretor(Corretor corretor) {
         if(!corretores.contains(corretor)) {
             corretores.add(corretor);
         }
     }
+    public List<String> getTags() {return tags;}
+    public void setTags(String tags) {this.tags.add(tags);}
+
+
 
     public void exibirDetalhes() {
         System.out.println("Endereço: " + endereco);

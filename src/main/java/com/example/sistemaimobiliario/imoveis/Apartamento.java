@@ -11,12 +11,16 @@ public class Apartamento extends Imovel{
         super(endereco, preco, quartos, banheiros, area, descricao, proprietario, status, tipoImovel, tipoVenda);
         if(temElevador) {setTags("Tem elevador");}
         if(temSacada) {setTags("Tem sacada");}
+        this.temElevador = temElevador;
+        this.temSacada = temSacada;
     }
 
     public Apartamento(String endereco, double preco, int quartos, int banheiros, double area, String descricao, String proprietario, String status, boolean temElevador, boolean temSacada, int andar, String tipoImovel, String tipoVenda) {
         super(endereco, preco, quartos, banheiros, area, descricao, proprietario, status, tipoImovel, tipoVenda);
         if(temElevador) {setTags("Tem elevador");}
         if(temSacada) {setTags("Tem sacada");}
+        this.temElevador = temElevador;
+        this.temSacada = temSacada;
         this.andar = andar;
     }
 
