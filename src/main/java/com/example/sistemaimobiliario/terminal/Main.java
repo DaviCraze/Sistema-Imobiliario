@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import com.example.sistemaimobiliario.usuario.Cliente;
+import com.example.sistemaimobiliario.usuario.Corretor;
 import com.example.sistemaimobiliario.usuario.Pessoa;
 import com.example.sistemaimobiliario.utilitario.ListaClientes;
 import com.example.sistemaimobiliario.utilitario.ListaCorretor;
@@ -50,6 +51,8 @@ public class Main {
 
                     if(loginValido && conta instanceof Cliente contaCliente){
                         MenuCliente.iniciaCliente(contaCliente);
+                    } else if(loginValido && conta instanceof Corretor contaCorretor){
+                        MenuCorretor.iniciaCorretor(contaCorretor);
                     }
                     break;
                 case 4:

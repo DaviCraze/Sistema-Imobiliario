@@ -63,6 +63,7 @@ public abstract class Imovel {
     public void adicionarCorretor(Corretor corretor) {
         if(!corretores.contains(corretor)) {
             corretores.add(corretor);
+            corretor.adicionarImovel(this);
         }
     }
     public List<String> getTags() {return tags;}
@@ -84,6 +85,7 @@ public abstract class Imovel {
 
     public void exibirResumo(){
         System.out.println("Endereço: "+ endereco);
-        System.out.println("Preferencias: "+tags);
+        System.out.println("Preferencias: "+ tags);
+        System.out.println("Status: "+ status);
     }
 }
