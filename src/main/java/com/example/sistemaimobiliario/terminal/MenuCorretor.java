@@ -2,6 +2,7 @@ package com.example.sistemaimobiliario.terminal;
 
 import com.example.sistemaimobiliario.usuario.Corretor;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MenuCorretor {
@@ -56,8 +57,35 @@ public class MenuCorretor {
                         }
                         break;
                     case 2:
+                        corretor.exibirImoveisPaginados();
+                        break;
+                    case 3:
+                        corretor.exibirResumoVendas();
+                        break;
+                    case 4:
+                        System.out.println("Tem certeza que deseja sair? (S/N)");
+                        String opcao3 = sc.nextLine();
+                        sc.nextLine();
+                        boolean executando1 = true;
+                        while(executando1){
+                            if(opcao3.equalsIgnoreCase("S")){
+                                System.out.println("Saindo...");
+                                executando1 = false;
+                                executando = false;
+                                break;
+                            } else if(opcao3.equalsIgnoreCase("N")){
+                                System.out.println();
+                                executando1 = false;
+                                break;
+                            } else {
+                                System.out.println("Escolha invalida. Tente novamente.");
+                            }
+                        }
                 }
+            }catch (InputMismatchException e) {
+                System.out.println("Digite um numero inteiro.");
+                sc.nextLine();
             }
-        }
+        }while(executando);
     }
 }

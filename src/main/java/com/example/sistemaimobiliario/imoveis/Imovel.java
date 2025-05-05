@@ -60,9 +60,11 @@ public abstract class Imovel {
     public void setStatus(String status) {this.status = status;}
 
     public List<Corretor> getCorretores() {return corretores;}
+
     public void adicionarCorretor(Corretor corretor) {
         if(!corretores.contains(corretor)) {
             corretores.add(corretor);
+            System.out.println("Corretor adicionado ao imovel: "+ corretor.getNome());
             corretor.adicionarImovel(this);
         }
     }
