@@ -11,6 +11,7 @@ public class MenuCorretor {
     public static void iniciaCorretor(Corretor corretor) {
         int opcao;
         boolean executando = true;
+        boolean executando1 = true;
 
         do {
             try {
@@ -66,7 +67,6 @@ public class MenuCorretor {
                         System.out.println("Tem certeza que deseja sair? (S/N)");
                         String opcao3 = sc.nextLine();
                         sc.nextLine();
-                        boolean executando1 = true;
                         while(executando1){
                             if(opcao3.equalsIgnoreCase("S")){
                                 System.out.println("Saindo...");
