@@ -154,7 +154,7 @@ public class Cliente extends Pessoa{
     }
 
     public void exibirCorretores(Imovel imovel){
-        int totalCorretores = imovel.getCorretores().size();
+        int totalCorretores = imovel.getCorretoresOrdenadosAvaliacao().size();
         int totalPaginas = (int) Math.ceil(totalCorretores / 10);
         if(totalPaginas == 0) {
             totalPaginas = 1;
@@ -169,7 +169,7 @@ public class Cliente extends Pessoa{
 
             for(int i = inicio; i < fim; i++){
                 System.out.print((i + 1) + " - ");
-                imovel.getCorretores().get(i).exibirResumo();
+                imovel.getCorretoresOrdenadosAvaliacao().get(i).exibirResumo();
             }
             System.out.println("---------------------------------------------------------------");
             System.out.println("Digite o numero do corretor(1 - "+fim+") ou:");
@@ -182,11 +182,12 @@ public class Cliente extends Pessoa{
                 paginaAtual--;
             } else if(opcao.equalsIgnoreCase("S")){
                 System.out.println("Saindo...");
+                break;
             } else {
                 try {
                     int escolha = Integer.parseInt(opcao);
                     if(escolha >= 1 && escolha <= fim ){
-                        Corretor corretorSelecionado = imovel.getCorretores().get(inicio + escolha - 1);
+                        Corretor corretorSelecionado = imovel.getCorretoresOrdenadosAvaliacao().get(inicio + escolha - 1);
                         corretorSelecionado.exibirDetalhes();
                     }
                 } catch (NumberFormatException e) {

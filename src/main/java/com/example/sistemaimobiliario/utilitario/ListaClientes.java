@@ -42,9 +42,9 @@ public class ListaClientes implements IRepositorio {
 
     }
     @Override
-    public Cliente busca(String cpf) {
+    public Cliente busca(String email) {
         for(Cliente clienteC : listaClientes){
-            if(clienteC.getCpf().equals(cpf)) {
+            if(clienteC.getCpf().equals(email)) {
                 return clienteC;
             }
         }

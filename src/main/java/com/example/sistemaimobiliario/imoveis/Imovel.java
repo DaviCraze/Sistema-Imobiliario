@@ -61,6 +61,21 @@ public abstract class Imovel {
 
     public List<Corretor> getCorretores() {return corretores;}
 
+    public List<Corretor> getCorretoresOrdenadosAvaliacao(){
+        List<Corretor> corretoresOrdenados = new ArrayList<>(corretores);
+
+        for(int i = 0; i < corretores.size() - 1; i++) {
+            for(int j = i + 1; j < corretores.size(); j++) {
+                if(corretoresOrdenados.get(i).getAvaliacao() < corretoresOrdenados.get(j).getAvaliacao()) {
+                    Corretor aux = corretoresOrdenados.get(i);
+                    corretoresOrdenados.set(i, corretoresOrdenados.get(j));
+                    corretoresOrdenados.set(j, aux);
+                }
+            }
+        }
+        return corretoresOrdenados;
+    }
+
     public void adicionarCorretor(Corretor corretor) {
         if(!corretores.contains(corretor)) {
             corretores.add(corretor);

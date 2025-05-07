@@ -16,6 +16,9 @@ public class Corretor extends Pessoa {
     private String senha;
     private int quantidadeVendas;
     private int quantidadeAlugadas;
+    private double avaliacao;
+    private double somaAvaliacoes = 0;
+    private int totalAvaliacoes = 0;
 
     public Corretor(String nome, String cpf, String telefone, String email, String cnpj, String nomeEmpresa, String senha) {
         super(nome, cpf, telefone, email, senha);
@@ -33,6 +36,19 @@ public class Corretor extends Pessoa {
     public void setCnpj(String cnpj) {this.cnpj = cnpj;}
 
     public List<Imovel> getImoveis() {return imoveis;}
+
+    public double getAvaliacao() {return avaliacao;}
+
+    public void atualizarAvaliacao(double avaliacao){
+        if (avaliacao < 1 || avaliacao > 5) {
+            System.out.println("Avaliacao invalida.");
+            return;
+        }
+        somaAvaliacoes += avaliacao;
+        totalAvaliacoes++;
+        this.avaliacao = somaAvaliacoes / totalAvaliacoes;
+    }
+
 
     public void adicionarImovel(Imovel imovel) {
         if(!imoveis.contains(imovel)) {
@@ -55,6 +71,7 @@ public class Corretor extends Pessoa {
     public void exibirResumo(){
         System.out.println("Nome da Empresa: "+ nomeEmpresa);
         System.out.println("CNPJ: " + cnpj);
+        System.out.println("Avaliacao: "+avaliacao);
     }
 
     public void exibirResumoVendas(){
