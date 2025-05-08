@@ -80,7 +80,6 @@ public abstract class Imovel {
         if(!corretores.contains(corretor)) {
             corretores.add(corretor);
             System.out.println("Corretor adicionado ao imovel: "+ corretor.getNome());
-            corretor.adicionarImovel(this);
         }
     }
     public List<String> getTags() {return tags;}

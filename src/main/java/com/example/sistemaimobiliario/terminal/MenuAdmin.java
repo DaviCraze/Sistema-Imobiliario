@@ -1,5 +1,6 @@
 package com.example.sistemaimobiliario.terminal;
 
+import com.example.sistemaimobiliario.imoveis.Casa;
 import com.example.sistemaimobiliario.usuario.Admin;
 import com.example.sistemaimobiliario.usuario.Cliente;
 import com.example.sistemaimobiliario.utilitario.ListaClientes;
@@ -154,6 +155,7 @@ public class MenuAdmin {
                             case 1:
                                 String tipoImovel;
                                 String tipoVendaAluguel;
+                                String status;
                                 double valorImovel;
                                 int quantidadeQuartos;
                                 int quantidadeBanheiros;
@@ -161,6 +163,12 @@ public class MenuAdmin {
                                 double area;
                                 String descricao;
                                 String proprietario;
+                                boolean temPiscina = false;
+                                boolean temGaragem = false;
+                                boolean temQuintal = false;
+                                boolean temSacada = false;
+                                boolean temElevador = false;
+                                int andar;
                                 while(true){
                                     System.out.println("Qual o tipo de imovel?(1-Casa, 2-Apartamento)");
                                     int opcao6 = sc.nextInt();
@@ -181,9 +189,11 @@ public class MenuAdmin {
                                     sc.nextLine();
                                     if(opcao7 == 1){
                                         tipoVendaAluguel = "Venda";
+                                        status = "Disponivel para Venda";
                                         break;
                                     } else if(opcao7 == 2){
                                         tipoVendaAluguel = "Alugar";
+                                        status = "Disponivel para Aluguel";
                                         break;
                                     } else {
                                         System.out.println("Digite um numero entre 1 e 2.");
@@ -259,8 +269,89 @@ public class MenuAdmin {
                                         System.out.println("Proprietario não pode ser vazio.");
                                     }
                                 }
-                                if(tipoImovel.equals("Casa")){}
-                                while(true){
+                                if(tipoImovel.equals("Casa")){
+                                    while(true){
+                                        System.out.println("A casa tem piscina?(S/N)");
+                                        String opcao8 = sc.nextLine();
+                                        if(opcao8.equals("S")){
+                                            temPiscina = true;
+                                            break;
+                                        } else if(opcao8.equals("N")){
+                                            temPiscina = false;
+                                            break;
+                                        } else {
+                                            System.out.println("Digite S ou N.");
+                                        }
+                                    }
+                                    while(true) {
+                                        System.out.println("A casa tem garagem?(S/N)");
+                                        String opcao9 = sc.nextLine();
+                                        if(opcao9.equals("S")){
+                                            temGaragem = true;
+                                            break;
+                                        } else if(opcao9.equals("N")){
+                                            temGaragem = false;
+                                            break;
+                                        } else {
+                                            System.out.println("Digite S ou N.");
+                                        }
+                                    }
+                                    while(true){
+                                        System.out.println("A casa tem quintal?(S/N)");
+                                        String opcao10 = sc.nextLine();
+                                        if(opcao10.equals("S")){
+                                            temQuintal = true;
+                                            break;
+                                        } else if(opcao10.equals("N")){
+                                            temQuintal = false;
+                                            break;
+                                        } else {
+                                            System.out.println("Digite S ou N.");
+                                        }
+                                    }
+                                } else if(tipoImovel.equals("Apartamento")){
+                                    while(true){
+                                        System.out.println("Qual o andar do apartamento?(Numero Inteiro)");
+                                        andar = sc.nextInt();
+                                        sc.nextLine();
+                                        if(andar > 0){
+                                            break;
+                                        } else {
+                                            System.out.println("Digite um numero maior que zero.");
+                                        }
+                                    }
+                                    while(true) {
+                                        System.out.println("O apartamento tem sacada?(S/N)");
+                                        String opcao11 = sc.nextLine();
+                                        if(opcao11.equals("S")){
+                                            temSacada = true;
+                                            break;
+                                        } else if(opcao11.equals("N")){
+                                            temSacada = false;
+                                            break;
+                                        } else {
+                                            System.out.println("Digite S ou N.");
+                                        }
+
+                                    }
+                                    while(true){
+                                        System.out.println("O apartamento tem elevador?(S/N)");
+                                        String opcao12 = sc.nextLine();
+                                        if(opcao12.equals("S")){
+                                            temElevador = true;
+                                            break;
+                                        } else if(opcao12.equals("N")){
+                                            temElevador = false;
+                                            break;
+                                        } else {
+                                            System.out.println("Digite S ou N.");
+                                        }
+                                    }
+
+                                }
+                                if(tipoImovel.equals("Casa")){
+                                    Casa casaCriada = new Casa(endereco, valorImovel, quantidadeQuartos, quantidadeBanheiros, area, descricao, proprietario, status, temQuintal, temGaragem, temPiscina, tipoImovel, tipoVendaAluguel);
+                                    System.out.println("Adicione Corretores afiliados ao Imovel");
 
                                 }
                         }

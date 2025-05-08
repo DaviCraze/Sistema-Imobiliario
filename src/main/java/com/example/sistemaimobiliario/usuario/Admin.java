@@ -175,4 +175,59 @@ public class Admin {
         }
     }
 
+    public static void adicionarCorretorNoImovel(List<Corretor> listaCorretores, Imovel imovel){
+        int totalCorretores = listaCorretores.size();
+        int totalPaginas = (int) Math.ceil(totalCorretores / 10);
+        if(totalPaginas == 0) {
+            totalPaginas = 1;
+        }
+        int paginaAtual = 1;
+
+        while (true) {
+            System.out.println("Pagina "+paginaAtual+"/"+totalPaginas);
+            System.out.println("---------------------------------------------------------------");
+            int inicio = (paginaAtual - 1) * 10;
+            int fim = Math.min(inicio + 10, totalCorretores);
+
+            for(int i = inicio; i < fim; i++){
+                System.out.print((i + 1) + " - ");
+                listaCorretores.get(i).exibirDetalhes();
+            }
+            System.out.println("---------------------------------------------------------------");
+            System.out.println("Digite o numero do corretor(1 - "+fim+") ou:");
+            System.out.println("[N] - Proxima pagina | [P] - Voltar a pagina anterior | [S] - Sair");
+            String opcao = sc.nextLine();
+
+            if(opcao.equalsIgnoreCase("N") && paginaAtual < totalPaginas) {
+                paginaAtual++;
+            } else if(opcao.equalsIgnoreCase("P") && paginaAtual > 1) {
+                paginaAtual--;
+            } else if(opcao.equalsIgnoreCase("S")){
+                System.out.println("Saindo...");
+                break;
+            } else {
+                try {
+                    int escolha = Integer.parseInt(opcao);
+                    if (escolha >= 1 && escolha <= fim) {
+                        Corretor corretorSelecionado = listaCorretores.get(inicio + escolha - 1);
+                        System.out.println("Deseja adicionar o corretor: " + corretorSelecionado.getNome() + " ao imovel?: (S/N)");
+                        String opcao2 = sc.nextLine();
+                        if (opcao2.equalsIgnoreCase("S")) {
+                            imovel.adicionarCorretor(corretorSelecionado);
+                            corretorSelecionado.adicionarImovel(imovel);
+                            System.out.println("Corretor adicionado com sucesso!");
+                            break;
+                        } else if (opcao2.equalsIgnoreCase("N")) {
+                            System.out.println("Operacao cancelada.");
+                        } else {
+                            System.out.println("Opcao invalida.");
+                        }
+                    }
+                }catch (NumberFormatException e) {
+                    System.out.println("Digite um numero valido.");
+                }
+            }
+        }
+    }
+
 }
