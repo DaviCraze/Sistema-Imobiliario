@@ -23,7 +23,7 @@ public class ListaImoveis implements IRepositorio {
     }
 
 
-    public ArrayList<Imovel> getListaImoveis() {
+    public static ArrayList<Imovel> getListaImoveis() {
         return listaImoveis;
     }
 

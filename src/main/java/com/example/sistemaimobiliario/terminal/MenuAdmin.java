@@ -1,16 +1,20 @@
 package com.example.sistemaimobiliario.terminal;
 
+import com.example.sistemaimobiliario.imoveis.Apartamento;
 import com.example.sistemaimobiliario.imoveis.Casa;
+import com.example.sistemaimobiliario.imoveis.Imovel;
 import com.example.sistemaimobiliario.usuario.Admin;
 import com.example.sistemaimobiliario.usuario.Cliente;
 import com.example.sistemaimobiliario.utilitario.ListaClientes;
 import com.example.sistemaimobiliario.utilitario.ListaCorretor;
+import com.example.sistemaimobiliario.utilitario.ListaImoveis;
 
 import java.util.Scanner;
 
 public class MenuAdmin {
     static Scanner sc = new Scanner(System.in);
     static ListaClientes listaClientes = new ListaClientes();
+    static ListaImoveis listaImoveis = new ListaImoveis();
 
     public static void iniciaAdmin(){
         int opcao;
@@ -168,7 +172,7 @@ public class MenuAdmin {
                                 boolean temQuintal = false;
                                 boolean temSacada = false;
                                 boolean temElevador = false;
-                                int andar;
+                                int andar = 0;
                                 while(true){
                                     System.out.println("Qual o tipo de imovel?(1-Casa, 2-Apartamento)");
                                     int opcao6 = sc.nextInt();
@@ -309,7 +313,7 @@ public class MenuAdmin {
                                             System.out.println("Digite S ou N.");
                                         }
                                     }
-                                } else if(tipoImovel.equals("Apartamento")){
+                                } else {
                                     while(true){
                                         System.out.println("Qual o andar do apartamento?(Numero Inteiro)");
                                         andar = sc.nextInt();
@@ -352,7 +356,52 @@ public class MenuAdmin {
                                 if(tipoImovel.equals("Casa")){
                                     Casa casaCriada = new Casa(endereco, valorImovel, quantidadeQuartos, quantidadeBanheiros, area, descricao, proprietario, status, temQuintal, temGaragem, temPiscina, tipoImovel, tipoVendaAluguel);
                                     System.out.println("Adicione Corretores afiliados ao Imovel");
-
+                                    Admin.adicionarCorretorNoImovel(ListaCorretor.getListaCorretores(), casaCriada);
+                                } else if(tipoImovel.equals("Apartamento")) {
+                                    Apartamento apCriado = new Apartamento(endereco, valorImovel, quantidadeQuartos, quantidadeBanheiros, area, descricao, proprietario, status, temElevador, temSacada, andar, tipoImovel, tipoVendaAluguel);
+                                    System.out.println("Adicione Corretores afiliados ao Imovel");
+                                    Admin.adicionarCorretorNoImovel(ListaCorretor.getListaCorretores(), apCriado);
+                                }
+                                System.out.println("Processo Concluido!");
+                                break;
+                            case 2:
+                                Admin.removerImovel(ListaImoveis.getListaImoveis());
+                                break;
+                            case 3:
+                                System.out.println("Digite o endereço do Imovel: ");
+                                String endereco1 = sc.nextLine();
+                                sc.nextLine();
+                                Cliente clienteBuscado = listaClientes.busca(endereco1);
+                                clienteBuscado.exibirDetalhes();
+                                break;
+                            case 4:
+                                System.out.println("Digite o endereço do imovel no qual deseja atualizar: ");
+                                String endereco2 = sc.nextLine();
+                                sc.nextLine();
+                                Imovel imovelAtualizado = listaImoveis.busca(endereco2);
+                                System.out.println("1 - Preço");
+                                System.out.println("2 - Quantidade de Quartos");
+                                System.out.println("3 - Quantidade de Banheiros");
+                                System.out.println("4 - Descrição");
+                                System.out.println("5 - Status");
+                                int opcao13 = sc.nextInt();
+                                sc.nextLine();
+                                switch(opcao13){
+                                    case 1:
+                                        System.out.println("Digite o novo preço do imovel: ");
+                                        double novoPreco = sc.nextDouble();
+                                        sc.nextLine();
+                                        if(novoPreco < 0){
+                                            System.out.println("Digite um preço maior que zero.");
+                                        } else {
+                                            imovelAtualizado.setPreco(novoPreco);
+                                        }
+                                        break;
+                                    case 2:
+                                        System.out.println("Digite a nova quantidade de quartos: ");
+                                        int novaQtdQuartos = sc.nextInt();
+                                        sc.nextLine();
+                                        if()
                                 }
                         }
                 }
