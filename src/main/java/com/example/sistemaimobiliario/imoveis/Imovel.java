@@ -39,13 +39,31 @@ public abstract class Imovel {
     public void setEndereco(String endereco) {this.endereco = endereco;}
 
     public double getPreco() {return preco;}
-    public void setPreco(double preco) {this.preco = preco;}
+    public void setPreco(double preco) {
+        if(preco < 0) {
+            System.out.println("Digite um preço maior que zero");
+        } else {
+            this.preco = preco;
+        }
+    }
 
     public int getQuartos() {return quartos;}
-    public void setQuartos(int quartos) {this.quartos = quartos;}
+    public void setQuartos(int quartos) {
+        if(quartos < 1) {
+            System.out.println("Digite um numero de quartos maior que zero");
+        } else {
+            this.quartos = quartos;
+        }
+    }
 
     public int getBanheiros() {return banheiros;}
-    public void setBanheiros(int banheiros) {this.banheiros = banheiros;}
+    public void setBanheiros(int banheiros) {
+        if(banheiros < 1) {
+            System.out.println("Digite um numero de banheiros maior que zero");
+        } else {
+            this.banheiros = banheiros;
+        }
+    }
 
     public double getArea() {return area;}
     public void setArea(double area) {this.area = area;}
@@ -79,7 +97,6 @@ public abstract class Imovel {
     public void adicionarCorretor(Corretor corretor) {
         if(!corretores.contains(corretor)) {
             corretores.add(corretor);
-            System.out.println("Corretor adicionado ao imovel: "+ corretor.getNome());
         }
     }
     public List<String> getTags() {return tags;}

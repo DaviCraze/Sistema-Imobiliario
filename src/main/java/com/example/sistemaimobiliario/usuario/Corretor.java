@@ -39,6 +39,9 @@ public class Corretor extends Pessoa {
 
     public double getAvaliacao() {return avaliacao;}
 
+    public int getQuantidadeVendas() {return quantidadeVendas;}
+    public int getQuantidadeAlugadas() {return quantidadeAlugadas;}
+
     public void atualizarAvaliacao(double avaliacao){
         if (avaliacao < 1 || avaliacao > 5) {
             System.out.println("Avaliacao invalida.");

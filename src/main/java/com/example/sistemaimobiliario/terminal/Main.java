@@ -53,6 +53,9 @@ public class Main {
                         MenuCliente.iniciaCliente(contaCliente);
                     } else if(loginValido && conta instanceof Corretor contaCorretor){
                         MenuCorretor.iniciaCorretor(contaCorretor);
+                    } else if(email.equals("admin") && senha.equals("admin")){
+                        System.out.println("Logado como administrador.");
+                        MenuAdmin.iniciaAdmin();
                     }
                     break;
                 case 4:

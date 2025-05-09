@@ -11,8 +11,8 @@ public class ListaImoveis implements IRepositorio {
     private static ArrayList<Imovel> listaImoveis = new ArrayList<>();
 
     static {
-        Casa casa1 = new Casa("Rua Adolfo", 300000, 3, 2, 150, "Casa Verde na Praia", "Davi Vieira", "Disponivel para venda", true, true, false, "Casa", "Venda");
-        Apartamento casa2 = new Apartamento("Rua Adolfo", 300000, 3, 2, 150, "Apartamento Verde na Praia", "Davi Vieira", "Disponivel para Aluguel", true, false, 7, "Apartamento", "Alugar");
+        Casa casa1 = new Casa("Rua Adolfo", 300000, 3, 2, 150, "Casa Verde na Praia", "Davi Vieira", "Disponivel", true, true, false, "Casa", "Venda");
+        Apartamento casa2 = new Apartamento("Rua Adolfo", 300000, 3, 2, 150, "Apartamento Verde na Praia", "Davi Vieira", "Disponivel", true, false, 7, "Apartamento", "Alugar");
         casa1.adicionarCorretor(ListaCorretor.getListaCorretoresPorID(0));
         casa1.adicionarCorretor(ListaCorretor.getListaCorretoresPorID(1));
         casa2.adicionarCorretor(ListaCorretor.getListaCorretoresPorID(0));
