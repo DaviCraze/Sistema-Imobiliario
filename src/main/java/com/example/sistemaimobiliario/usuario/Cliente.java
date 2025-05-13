@@ -3,6 +3,7 @@ package com.example.sistemaimobiliario.usuario;
 import com.example.sistemaimobiliario.imoveis.Imovel;
 import com.example.sistemaimobiliario.utilitario.ListaCorretor;
 import com.example.sistemaimobiliario.utilitario.ListaImoveis;
+import com.example.sistemaimobiliario.utilitario.ListaInteresse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -138,7 +139,7 @@ public class Cliente extends Pessoa{
     public void ordenaImoveisCliente(){
         ListaImoveis listaImoveis = new ListaImoveis();
 
-        for(Imovel imovel : listaImoveis.getListaImoveis()){
+        for(Imovel imovel : listaImoveis.getImoveisOrdenadosPorStatus()){
             int contd = 0;
 
             for(String preferencia : preferencias){
@@ -189,6 +190,18 @@ public class Cliente extends Pessoa{
                     if(escolha >= 1 && escolha <= fim ){
                         Corretor corretorSelecionado = imovel.getCorretoresOrdenadosAvaliacao().get(inicio + escolha - 1);
                         corretorSelecionado.exibirDetalhes();
+                        System.out.println("1 - Mostrar interesse pelo imovel?(Compartilhar telefone e email)");
+                        System.out.println("2 - Voltar");
+                        int opcao2 = sc.nextInt();
+                        sc.nextLine();
+                        if(opcao2 == 1){
+                            ListaInteresse<String, String, Imovel> interesse = new ListaInteresse<>(getTelefone(), getEmail(), imovel);
+                            corretorSelecionado.setListaInteresse(interesse);
+                            System.out.println("Interesse registrado!");
+                            break;
+                        } else {
+                            System.out.println("Voltando...");
+                        }
                     }
                 } catch (NumberFormatException e) {
                     System.out.println("Digite um numero valido.");
@@ -256,4 +269,5 @@ public class Cliente extends Pessoa{
             }
         }
     }
+
 }

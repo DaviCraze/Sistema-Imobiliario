@@ -18,8 +18,9 @@ public class MenuCorretor {
                 System.out.println("Bem vindo: "+corretor.getNome());
                 System.out.println("1 - Ver perfil");
                 System.out.println("2 - Sua lista de imoveis");
-                System.out.println("3 - Dados do mes");
-                System.out.println("4 - Log out");
+                System.out.println("3 - Lista de Interessados");
+                System.out.println("4 - Dados do mes");
+                System.out.println("5 - Log out");
                 opcao = sc.nextInt();
                 sc.nextLine();
                 switch (opcao) {
@@ -61,12 +62,14 @@ public class MenuCorretor {
                         corretor.exibirImoveisPaginados();
                         break;
                     case 3:
-                        corretor.exibirResumoVendas();
+                        corretor.gerenciarInteressados();
                         break;
                     case 4:
+                        corretor.exibirResumoVendas();
+                        break;
+                    case 5:
                         System.out.println("Tem certeza que deseja sair? (S/N)");
                         String opcao3 = sc.nextLine();
-                        sc.nextLine();
                         while(executando1){
                             if(opcao3.equalsIgnoreCase("S")){
                                 System.out.println("Saindo...");

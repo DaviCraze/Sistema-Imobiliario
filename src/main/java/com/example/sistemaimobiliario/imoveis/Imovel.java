@@ -1,5 +1,7 @@
 package com.example.sistemaimobiliario.imoveis;
 import com.example.sistemaimobiliario.usuario.Corretor;
+import com.example.sistemaimobiliario.utilitario.ListaImoveis;
+import com.example.sistemaimobiliario.utilitario.ListaInteresse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,8 +101,13 @@ public abstract class Imovel {
             corretores.add(corretor);
         }
     }
+
     public List<String> getTags() {return tags;}
     public void setTags(String tags) {this.tags.add(tags);}
+
+    public String getTipoImovel() {return tipoImovel;}
+
+    public String getTipoVenda() {return tipoVenda;}
 
 
 

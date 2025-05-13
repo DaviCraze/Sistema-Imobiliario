@@ -2,6 +2,8 @@ package com.example.sistemaimobiliario.usuario;
 
 import com.example.sistemaimobiliario.imoveis.Imovel;
 import com.example.sistemaimobiliario.utilitario.ListaImoveis;
+import com.example.sistemaimobiliario.utilitario.ListaInteresse;
+import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +21,14 @@ public class Corretor extends Pessoa {
     private double avaliacao;
     private double somaAvaliacoes = 0;
     private int totalAvaliacoes = 0;
+    private List<ListaInteresse<String, String, Imovel>> listaInteresse;
 
     public Corretor(String nome, String cpf, String telefone, String email, String cnpj, String nomeEmpresa, String senha) {
         super(nome, cpf, telefone, email, senha);
         this.cnpj = cnpj;
         this.nomeEmpresa = nomeEmpresa;
         this.imoveis = new ArrayList<>();
+        this.listaInteresse = new ArrayList<>();
         contador++;
         this.quantidadeAlugadas = 0;
         this.quantidadeVendas = 0;
@@ -41,6 +45,9 @@ public class Corretor extends Pessoa {
 
     public int getQuantidadeVendas() {return quantidadeVendas;}
     public int getQuantidadeAlugadas() {return quantidadeAlugadas;}
+
+    public List<ListaInteresse<String, String, Imovel>> getListaInteresse() {return listaInteresse;}
+    public void setListaInteresse(ListaInteresse<String, String, Imovel> listaInteresse) {this.listaInteresse.add(listaInteresse);}
 
     public void atualizarAvaliacao(double avaliacao){
         if (avaliacao < 1 || avaliacao > 5) {
@@ -68,7 +75,6 @@ public class Corretor extends Pessoa {
         super.exibirDetalhes();
         System.out.println("Nome da Empresa: " + nomeEmpresa);
         System.out.println("CNPJ: " + cnpj);
-        System.out.println("Entre em contato pelo telefone: " + getTelefone() + "caso esteja interessado(a) pelo imovel");
     }
 
     public void exibirResumo(){
@@ -126,6 +132,47 @@ public class Corretor extends Pessoa {
                 }catch (NumberFormatException e) {
                     System.out.println("Escolha invalida.");
                 }
+            }
+        }
+    }
+
+    public void gerenciarInteressados(){
+        if(listaInteresse.isEmpty()){
+            System.out.println("Nenhum cliente demonstrou interesse nos seus imoveis.");
+            return;
+        }
+
+        System.out.println("Lista de Interessados:");
+        for(int i = 0; i < listaInteresse.size(); i++){
+            ListaInteresse<String, String, Imovel> interesse = listaInteresse.get(i);
+            System.out.print((i + 1) + " - ");
+            System.out.println("Telefone e Email para contato: "+interesse.getPrimeiro()+", "+interesse.getSegundo());
+            System.out.println("Imovel no qual Cliente se Interessou: "+interesse.getTerceiro().getDescricao());
+            System.out.println();
+        }
+        while(true) {
+            System.out.println("Escolha um interessado para finalizar o processo de compra do imovel(1 - " + listaInteresse.size() + "): ");
+            try {
+                int opcao3 = sc.nextInt();
+                sc.nextLine();
+
+                if (opcao3 >= 1 && opcao3 <= listaInteresse.size()) {
+                    ListaInteresse<String, String, Imovel> interesseSelecionado = listaInteresse.get(opcao3 - 1);
+                    interesseSelecionado.getTerceiro().setStatus("Indisponivel");
+                    listaInteresse.remove(opcao3 - 1);
+                    System.out.println("Processo Finalizado!");
+                    if(interesseSelecionado.getTerceiro().getTipoImovel().equals("Aluguel")){
+                        quantidadeAlugadas++;
+                    } else if(interesseSelecionado.getTerceiro().getTipoImovel().equals("Venda")){
+                        quantidadeVendas++;
+                    }
+                    break;
+                } else {
+                    System.out.println("Digite um numero entre 1 e " + listaInteresse.size());
+                }
+
+            } catch (NumberFormatException e) {
+                System.out.println("Digite um numero entre 1 e " + listaInteresse.size());
             }
         }
     }

@@ -72,7 +72,7 @@ public class MenuCliente {
                             case 1:
                                 System.out.println("Todos os imoveis disponiveis: ");
                                 ListaImoveis listaImoveis = new ListaImoveis();
-                                clienteC.exibirImoveisPaginados(listaImoveis.getListaImoveis());
+                                clienteC.exibirImoveisPaginados(listaImoveis.getImoveisOrdenadosPorStatus());
                                 break;
                             case 2:
                                 boolean executando1 = true;

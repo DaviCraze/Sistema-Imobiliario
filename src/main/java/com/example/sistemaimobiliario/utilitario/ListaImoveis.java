@@ -1,6 +1,8 @@
 package com.example.sistemaimobiliario.utilitario;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import com.example.sistemaimobiliario.imoveis.Imovel;
 import com.example.sistemaimobiliario.imoveis.Casa;
 import com.example.sistemaimobiliario.imoveis.Apartamento;
@@ -22,7 +24,22 @@ public class ListaImoveis implements IRepositorio {
         listaImoveis.add(casa2);
     }
 
+    public List<Imovel> getImoveisOrdenadosPorStatus() {
+        List<Imovel> imoveisOrdenados = ListaImoveis.getListaImoveis();
 
+        for (int i = 0; i < imoveisOrdenados.size() - 1; i++) {
+            for (int j = i + 1; j < imoveisOrdenados.size(); j++) {
+                if (imoveisOrdenados.get(i).getStatus().equalsIgnoreCase("Indisponivel") &&
+                        imoveisOrdenados.get(j).getStatus().equalsIgnoreCase("Disponivel")) {
+                    Imovel aux = imoveisOrdenados.get(i);
+                    imoveisOrdenados.set(i, imoveisOrdenados.get(j));
+                    imoveisOrdenados.set(j, aux);
+                }
+            }
+        }
+
+        return imoveisOrdenados;
+    }
     public static ArrayList<Imovel> getListaImoveis() {
         return listaImoveis;
     }

@@ -246,7 +246,7 @@ public class Admin {
     public static void adicionarImovel(){
         String tipoImovel = null;
         String tipoVendaAluguel = null;
-        String status = null;
+        String status = "Disponivel";
         double valorImovel = 0;
         int quantidadeQuartos = 0;
         int quantidadeBanheiros = 0;
@@ -281,11 +281,9 @@ public class Admin {
                     sc.nextLine();
                     if(opcao7 == 1){
                         tipoVendaAluguel = "Venda";
-                        status = "Disponivel para Venda";
                         break;
                     } else if(opcao7 == 2){
                         tipoVendaAluguel = "Alugar";
-                        status = "Disponivel para Aluguel";
                         break;
                     } else {
                         System.out.println("Digite um numero entre 1 e 2.");

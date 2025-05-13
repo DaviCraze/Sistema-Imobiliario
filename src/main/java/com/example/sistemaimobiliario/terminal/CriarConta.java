@@ -73,7 +73,6 @@ public class CriarConta {
         return variavel;
     }
 
-
     public static String criarSenha(){
         boolean senhaVerificada = false;
         String senha;
