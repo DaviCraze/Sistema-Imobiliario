@@ -15,13 +15,15 @@ public class ListaImoveis implements IRepositorio {
     static {
         Casa casa1 = new Casa("Rua Adolfo", 300000, 3, 2, 150, "Casa Verde na Praia", "Davi Vieira", "Disponivel", true, true, false, "Casa", "Venda");
         Apartamento casa2 = new Apartamento("Rua Adolfo", 300000, 3, 2, 150, "Apartamento Verde na Praia", "Davi Vieira", "Disponivel", true, false, 7, "Apartamento", "Alugar");
+        listaImoveis.add(casa1);
+        listaImoveis.add(casa2);
+
         casa1.adicionarCorretor(ListaCorretor.getListaCorretoresPorID(0));
         casa1.adicionarCorretor(ListaCorretor.getListaCorretoresPorID(1));
         casa2.adicionarCorretor(ListaCorretor.getListaCorretoresPorID(0));
         casa2.adicionarCorretor(ListaCorretor.getListaCorretoresPorID(1));
 
-        listaImoveis.add(casa1);
-        listaImoveis.add(casa2);
+
     }
 
     public List<Imovel> getImoveisOrdenadosPorStatus() {

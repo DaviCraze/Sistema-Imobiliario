@@ -7,6 +7,7 @@ import com.example.sistemaimobiliario.utilitario.ListaClientes;
 import com.example.sistemaimobiliario.utilitario.ListaCorretor;
 import com.example.sistemaimobiliario.utilitario.ListaImoveis;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -23,6 +24,13 @@ public class Admin {
         }
         System.out.println("Casas alugadas esse mês: "+ totalAlugadas);
         System.out.println("Casas vendidas esse mês: "+ totalVendidas);
+    }
+
+    public static void resetarMes(){
+        for(Corretor corretor : ListaCorretor.getListaCorretores()){
+            corretor.setQuantidadeAlugadas(0);
+            corretor.setQuantidadeVendas(0);
+        }
     }
 
     public static void removerCliente(List<Cliente> listaClientes){

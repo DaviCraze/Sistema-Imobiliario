@@ -8,6 +8,7 @@ import com.example.sistemaimobiliario.usuario.Cliente;
 import com.example.sistemaimobiliario.utilitario.ListaClientes;
 import com.example.sistemaimobiliario.utilitario.ListaCorretor;
 import com.example.sistemaimobiliario.utilitario.ListaImoveis;
+import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -232,6 +233,17 @@ public class MenuAdmin {
                         break;
                     case 4:
                         Admin.getResumoMes();
+                        System.out.println("1 - Resetar mês?");
+                        System.out.println("2 - Voltar");
+                        int opcao4 = sc.nextInt();
+                        sc.nextLine();
+
+                        if(opcao4 == 1){
+                            Admin.resetarMes();
+                            System.out.println("Dados do mês resetados!");
+                        } else {
+                            System.out.println("Voltando...");
+                        }
                         break;
                     case 5:
                         System.out.println("Deseja sair mesmo?(S/N)");

@@ -44,10 +44,20 @@ public class Corretor extends Pessoa {
     public double getAvaliacao() {return avaliacao;}
 
     public int getQuantidadeVendas() {return quantidadeVendas;}
+    public void setQuantidadeVendas(int quantidadeVendas) {this.quantidadeVendas = quantidadeVendas;}
+
     public int getQuantidadeAlugadas() {return quantidadeAlugadas;}
+    public void setQuantidadeAlugadas(int quantidadeAlugadas) {this.quantidadeAlugadas = quantidadeAlugadas;}
 
     public List<ListaInteresse<String, String, Imovel>> getListaInteresse() {return listaInteresse;}
-    public void setListaInteresse(ListaInteresse<String, String, Imovel> listaInteresse) {this.listaInteresse.add(listaInteresse);}
+    public void setListaInteresse(ListaInteresse<String, String, Imovel> listaInteresse) {
+        if(!this.listaInteresse.contains(listaInteresse)) {
+            this.listaInteresse.add(listaInteresse);
+        } else {
+            System.out.println("Você já mostrou interesse neste imovel");
+        }
+
+    }
 
     public void atualizarAvaliacao(double avaliacao){
         if (avaliacao < 1 || avaliacao > 5) {
@@ -59,11 +69,9 @@ public class Corretor extends Pessoa {
         this.avaliacao = somaAvaliacoes / totalAvaliacoes;
     }
 
-
     public void adicionarImovel(Imovel imovel) {
         if(!imoveis.contains(imovel)) {
             imoveis.add(imovel);
-            System.out.println("Imovel cadastrado com sucesso!");
         } else {
             System.out.println("Imovel ja esta cadastrado na lista do Corretor!");
         }
@@ -89,6 +97,10 @@ public class Corretor extends Pessoa {
     }
 
     public void exibirImoveisPaginados() {
+        if(imoveis.isEmpty()){
+            System.out.println("Nenhum imovel cadastrado na sua conta");
+            return;
+        }
         int totalImoveis = imoveis.size();
         int totalPaginas = (int) Math.ceil(totalImoveis / 10);
         if(totalPaginas == 0) {
@@ -98,7 +110,7 @@ public class Corretor extends Pessoa {
 
         while(true){
             System.out.println("Pagina atual: "+paginaAtual+"/"+totalPaginas);
-            System.out.println("----------------------------------------------------------------");
+            System.out.println("-----------------------------------------------------------------");
             int inicio = (paginaAtual - 1) * 10;
             int fim = Math.min(inicio + 10, totalImoveis);
 
@@ -106,6 +118,7 @@ public class Corretor extends Pessoa {
                 System.out.print((i + 1)+" - ");
                 imoveis.get(i).exibirResumo();
             }
+            System.out.println("-----------------------------------------------------------------");
             System.out.println("Digite o numero do imovel(1 - "+fim+") ou:");
             System.out.println("[N] - Proxima pagina | [P] - Pagina anterior | [S] - Sair");
             String opcao = sc.nextLine();
@@ -161,9 +174,9 @@ public class Corretor extends Pessoa {
                     interesseSelecionado.getTerceiro().setStatus("Indisponivel");
                     listaInteresse.remove(opcao3 - 1);
                     System.out.println("Processo Finalizado!");
-                    if(interesseSelecionado.getTerceiro().getTipoImovel().equals("Aluguel")){
+                    if(interesseSelecionado.getTerceiro().getTipoVenda().equals("Alugar")){
                         quantidadeAlugadas++;
-                    } else if(interesseSelecionado.getTerceiro().getTipoImovel().equals("Venda")){
+                    } else if(interesseSelecionado.getTerceiro().getTipoVenda().equals("Venda")){
                         quantidadeVendas++;
                     }
                     break;

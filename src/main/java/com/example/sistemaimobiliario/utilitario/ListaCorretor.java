@@ -12,10 +12,15 @@ public class ListaCorretor implements IRepositorio {
     static {
         Corretor c1 = new Corretor("Davi", "06505593390", "85991912232", "davi.vieira@", "24759124", "Corretor de Imóveis", "davi2448");
         Corretor c2 = new Corretor("Lucas", "86400912349", "88984730086", "lucas.vieira@", "85940345", "Corretor de Imóveis", "baguga2007");
-        c1.atualizarAvaliacao(4.5);
-        c2.atualizarAvaliacao(3.5);
         listaDeCorretores.add(c1);
         listaDeCorretores.add(c2);
+        c1.atualizarAvaliacao(4.5);
+        c2.atualizarAvaliacao(3.5);
+        c1.adicionarImovel(ListaImoveis.getListaImoveis().get(0));
+        c1.adicionarImovel(ListaImoveis.getListaImoveis().get(1));
+        c2.adicionarImovel(ListaImoveis.getListaImoveis().get(0));
+        c2.adicionarImovel(ListaImoveis.getListaImoveis().get(1));
+
     }
     @Override
     public void add(Object objeto) {
