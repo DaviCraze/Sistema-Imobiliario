@@ -21,7 +21,7 @@ public class Corretor extends Pessoa {
     private double avaliacao;
     private double somaAvaliacoes = 0;
     private int totalAvaliacoes = 0;
-    private List<ListaInteresse<String, String, Imovel>> listaInteresse;
+    private List<ListaInteresse<String, Cliente, Imovel>> listaInteresse;
 
     public Corretor(String nome, String cpf, String telefone, String email, String cnpj, String nomeEmpresa, String senha) {
         super(nome, cpf, telefone, email, senha);
@@ -49,8 +49,8 @@ public class Corretor extends Pessoa {
     public int getQuantidadeAlugadas() {return quantidadeAlugadas;}
     public void setQuantidadeAlugadas(int quantidadeAlugadas) {this.quantidadeAlugadas = quantidadeAlugadas;}
 
-    public List<ListaInteresse<String, String, Imovel>> getListaInteresse() {return listaInteresse;}
-    public void setListaInteresse(ListaInteresse<String, String, Imovel> listaInteresse) {
+    public List<ListaInteresse<String, Cliente, Imovel>> getListaInteresse() {return listaInteresse;}
+    public void setListaInteresse(ListaInteresse<String, Cliente, Imovel> listaInteresse) {
         if(!this.listaInteresse.contains(listaInteresse)) {
             this.listaInteresse.add(listaInteresse);
         } else {
@@ -157,9 +157,9 @@ public class Corretor extends Pessoa {
 
         System.out.println("Lista de Interessados:");
         for(int i = 0; i < listaInteresse.size(); i++){
-            ListaInteresse<String, String, Imovel> interesse = listaInteresse.get(i);
+            ListaInteresse<String, Cliente, Imovel> interesse = listaInteresse.get(i);
             System.out.print((i + 1) + " - ");
-            System.out.println("Telefone e Email para contato: "+interesse.getPrimeiro()+", "+interesse.getSegundo());
+            System.out.println("Telefone e Email para contato: "+interesse.getPrimeiro()+", "+interesse.getSegundo().getEmail());
             System.out.println("Imovel no qual Cliente se Interessou: "+interesse.getTerceiro().getDescricao());
             System.out.println();
         }
@@ -170,8 +170,9 @@ public class Corretor extends Pessoa {
                 sc.nextLine();
 
                 if (opcao3 >= 1 && opcao3 <= listaInteresse.size()) {
-                    ListaInteresse<String, String, Imovel> interesseSelecionado = listaInteresse.get(opcao3 - 1);
+                    ListaInteresse<String, Cliente, Imovel> interesseSelecionado = listaInteresse.get(opcao3 - 1);
                     interesseSelecionado.getTerceiro().setStatus("Indisponivel");
+                    interesseSelecionado.getSegundo().addAvaliacaoCorretores(this);
                     listaInteresse.remove(opcao3 - 1);
                     System.out.println("Processo Finalizado!");
                     if(interesseSelecionado.getTerceiro().getTipoVenda().equals("Alugar")){

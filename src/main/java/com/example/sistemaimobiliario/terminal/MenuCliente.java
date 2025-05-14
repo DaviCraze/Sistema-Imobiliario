@@ -15,6 +15,9 @@ public class MenuCliente {
 
     public static void iniciaCliente(Pessoa cliente){
         Cliente clienteC = (Cliente) cliente;
+        if(!clienteC.getAvaliacaoCorretores().isEmpty()){
+            clienteC.avaliarCorretor();
+        }
         int opcao;
         boolean executando = true;
         do{

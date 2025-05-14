@@ -4,8 +4,10 @@ import com.example.sistemaimobiliario.imoveis.Imovel;
 import com.example.sistemaimobiliario.utilitario.ListaCorretor;
 import com.example.sistemaimobiliario.utilitario.ListaImoveis;
 import com.example.sistemaimobiliario.utilitario.ListaInteresse;
+import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,12 +17,14 @@ public class Cliente extends Pessoa{
     private List<Imovel> imoveisFavoritos;
     private List<String> preferencias;
     private List<Imovel> imoveisOrdenados;
+    private List<Corretor> avaliacaoCorretores;
 
     public Cliente(String nome, String cpf, String telefone, String email, String senha) {
         super(nome, cpf, telefone, email, senha);
         this.imoveisFavoritos = new ArrayList<>();
         this.preferencias = new ArrayList<>();
         this.imoveisOrdenados = new ArrayList<>();
+        this.avaliacaoCorretores = new ArrayList<>();
     }
 
     public List<Imovel> getImoveisFavoritos() {return imoveisFavoritos;}
@@ -28,6 +32,9 @@ public class Cliente extends Pessoa{
     public List<String> getPreferencias() {return preferencias;}
 
     public List<Imovel> getImoveisOrdenados() {return imoveisOrdenados;}
+
+    public List<Corretor> getAvaliacaoCorretores() {return avaliacaoCorretores;}
+    public void addAvaliacaoCorretores(Corretor corretor) {this.avaliacaoCorretores.add(corretor);}
 
     public void addImovelFavorito(Imovel imovel) {
         if(!imoveisFavoritos.contains(imovel)){
@@ -190,17 +197,22 @@ public class Cliente extends Pessoa{
                     if(escolha >= 1 && escolha <= fim ){
                         Corretor corretorSelecionado = imovel.getCorretoresOrdenadosAvaliacao().get(inicio + escolha - 1);
                         corretorSelecionado.exibirDetalhes();
-                        System.out.println("1 - Mostrar interesse pelo imovel?(Compartilhar telefone e email)");
-                        System.out.println("2 - Voltar");
+                        System.out.println();
+                        if(!imovel.getStatus().equalsIgnoreCase("Indisponivel")){
+                            System.out.println("1 - Mostrar interesse pelo imovel?(Compartilhar telefone e email)");
+                        }
+                        System.out.println("0 - Voltar");
                         int opcao2 = sc.nextInt();
                         sc.nextLine();
-                        if(opcao2 == 1){
-                            ListaInteresse<String, String, Imovel> interesse = new ListaInteresse<>(getTelefone(), getEmail(), imovel);
+                        if(opcao2 == 1 && imovel.getStatus().equalsIgnoreCase("Disponivel")){
+                            ListaInteresse<String, Cliente, Imovel> interesse = new ListaInteresse<>(getTelefone(), this, imovel);
                             corretorSelecionado.setListaInteresse(interesse);
                             System.out.println("Interesse registrado!");
                             break;
-                        } else {
+                        } else if(opcao2 == 0){
                             System.out.println("Voltando...");
+                        } else {
+                            System.out.println("Digite um numero das opções acima");
                         }
                     }
                 } catch (NumberFormatException e) {
@@ -269,5 +281,30 @@ public class Cliente extends Pessoa{
             }
         }
     }
+
+    public void avaliarCorretor(){
+        System.out.println("Parabens pela sua aquisição! Avalie o corretor para melhorar sua experiencia!");
+        Iterator<Corretor> it = avaliacaoCorretores.iterator();
+
+        while(it.hasNext()){
+            try{
+                Corretor corretor = it.next();
+                System.out.println("Digite um valor entre 1 e 5 para avaliar o corretor "+corretor.getNomeEmpresa()+": ");
+                int opcao = sc.nextInt();
+                sc.nextLine();
+                if(opcao >= 1 && opcao <= 5){
+                    corretor.atualizarAvaliacao(opcao);
+                    System.out.println("Avaliacao registrada com sucesso!");
+                    break;
+                } else {
+                    System.out.println("Opcao invalida.");
+                }
+            }catch (Exception e){
+                System.out.println("Digite apenas numeros inteiros entre 1 e 5");
+            }
+        }
+    }
+
+
 
 }
