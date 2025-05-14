@@ -28,8 +28,8 @@ public class Admin {
 
     public static void resetarMes(){
         for(Corretor corretor : ListaCorretor.getListaCorretores()){
-            corretor.setQuantidadeAlugadas(0);
-            corretor.setQuantidadeVendas(0);
+            corretor.setQuantidadeAlugadasMes(0);
+            corretor.setQuantidadeVendasMes(0);
         }
     }
 

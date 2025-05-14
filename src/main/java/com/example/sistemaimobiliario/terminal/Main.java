@@ -14,7 +14,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int opcao;
         do{
-            System.out.println("Sistema de Imobiliário");
+            System.out.println("Sistema de Imobiliário - ImobConnect");
             System.out.println("Bem-vindo ao sistema de gerenciamento imobiliário!");
             System.out.println("Escolha uma opção:");
             System.out.println("1 - Criar conta Cliente");

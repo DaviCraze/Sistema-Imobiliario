@@ -18,6 +18,8 @@ public class Corretor extends Pessoa {
     private String senha;
     private int quantidadeVendas;
     private int quantidadeAlugadas;
+    private int quantidadeVendasMes;
+    private int quantidadeAlugadasMes;
     private double avaliacao;
     private double somaAvaliacoes = 0;
     private int totalAvaliacoes = 0;
@@ -44,10 +46,10 @@ public class Corretor extends Pessoa {
     public double getAvaliacao() {return avaliacao;}
 
     public int getQuantidadeVendas() {return quantidadeVendas;}
-    public void setQuantidadeVendas(int quantidadeVendas) {this.quantidadeVendas = quantidadeVendas;}
+    public void setQuantidadeVendasMes(int quantidadeVendas) {this.quantidadeVendasMes = quantidadeVendas;}
 
     public int getQuantidadeAlugadas() {return quantidadeAlugadas;}
-    public void setQuantidadeAlugadas(int quantidadeAlugadas) {this.quantidadeAlugadas = quantidadeAlugadas;}
+    public void setQuantidadeAlugadasMes(int quantidadeAlugadas) {this.quantidadeAlugadasMes = quantidadeAlugadas;}
 
     public List<ListaInteresse<String, Cliente, Imovel>> getListaInteresse() {return listaInteresse;}
     public void setListaInteresse(ListaInteresse<String, Cliente, Imovel> listaInteresse) {
@@ -83,6 +85,7 @@ public class Corretor extends Pessoa {
         super.exibirDetalhes();
         System.out.println("Nome da Empresa: " + nomeEmpresa);
         System.out.println("CNPJ: " + cnpj);
+        System.out.println("Avaliação: " + avaliacao);
     }
 
     public void exibirResumo(){
@@ -92,8 +95,10 @@ public class Corretor extends Pessoa {
     }
 
     public void exibirResumoVendas(){
-        System.out.println("Quantidade de Vendas: "+quantidadeVendas);
-        System.out.println("Quantidade de Alugadas: "+quantidadeAlugadas);
+        System.out.println("Quantidade de Vendas totais: "+quantidadeVendas);
+        System.out.println("Quantidade de Alugadas totais: "+quantidadeAlugadas);
+        System.out.println("Quantidade de Vendas esse mes: "+quantidadeVendasMes);
+        System.out.println("Quantidade de Alugadas esse mes: "+quantidadeAlugadasMes);
     }
 
     public void exibirImoveisPaginados() {
@@ -177,8 +182,10 @@ public class Corretor extends Pessoa {
                     System.out.println("Processo Finalizado!");
                     if(interesseSelecionado.getTerceiro().getTipoVenda().equals("Alugar")){
                         quantidadeAlugadas++;
+                        quantidadeAlugadasMes++;
                     } else if(interesseSelecionado.getTerceiro().getTipoVenda().equals("Venda")){
                         quantidadeVendas++;
+                        quantidadeVendasMes++;
                     }
                     break;
                 } else {
