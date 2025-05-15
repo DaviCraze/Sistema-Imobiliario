@@ -170,6 +170,7 @@ public class Corretor extends Pessoa {
         }
         while(true) {
             System.out.println("Escolha um interessado para finalizar o processo de compra do imovel(1 - " + listaInteresse.size() + "): ");
+            System.out.println("0 - Voltar");
             try {
                 int opcao3 = sc.nextInt();
                 sc.nextLine();
@@ -187,6 +188,8 @@ public class Corretor extends Pessoa {
                         quantidadeVendas++;
                         quantidadeVendasMes++;
                     }
+                    break;
+                } else if(opcao3 == 0) {
                     break;
                 } else {
                     System.out.println("Digite um numero entre 1 e " + listaInteresse.size());

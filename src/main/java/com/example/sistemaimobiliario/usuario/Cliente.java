@@ -135,8 +135,9 @@ public class Cliente extends Pessoa{
         }
         System.out.println("Escolha a preferencia que deseja remover("+1+" a "+tamanhoPreferencias+"): ");
         int opcao = sc.nextInt();
+        sc.nextLine();
 
-        if(opcao >= 1 && tamanhoPreferencias > opcao){
+        if(opcao >= 1 && tamanhoPreferencias+1 > opcao){
             preferencias.remove(opcao - 1);
         } else {
             System.out.println("Opção invalida.");
